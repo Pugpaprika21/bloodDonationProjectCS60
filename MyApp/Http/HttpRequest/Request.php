@@ -10,12 +10,27 @@ class Request
      */
     public static function multiple(): self
     {
+        $postResult = [];
         $post = isset($_POST) ? $_POST : [];
         $get = isset($_GET) ? $_GET : [];
         $files = isset($_FILES) ? $_FILES : [];
 
         self::$requests = array_merge($post, $get, $files);
         return new self;
+
+        // foreach ($post as $postKey => $postVal) {
+        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
+        // }
+
+        // foreach ($post as $postKey => $postVal) {
+        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
+        // }
+
+        // foreach ($post as $postKey => $postVal) {
+        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
+        // }
+
+        //$html = htmlspecialchars(strip_tags($_POST));
     }
     /**
      * @return array
