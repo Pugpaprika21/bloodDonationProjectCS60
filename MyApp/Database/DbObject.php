@@ -4,30 +4,46 @@ declare(strict_types=1);
 
 namespace MyApp\Database;
 
-use mysqli;
+use PDO;
+use PDOException;
 
 class DbObject
 {
-    private string $servername = "localhost";
-    private string $username = "root";
+    private string $servername = "";
+    private string $username = "";
     private string $password = "";
-    private string $dbname = "bloodDonationDb";
+    private string $dbname = "";
 
-    public $connResult = null;
+    public $conn = null;
     /**
+     * @method object construct()
      * @return object
      */
-    public function openConnect(): object
+    public function __construct()
     {
-        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
-        $this->connResult = $conn;
-        return $this;
+        $this->servername = "localhost";
+        $this->username = "root";
+        $this->password = "";
+        $this->dbname = "bloodDonationDb";
+    }
+    /**
+     * @return PDO
+     */
+    public function openConnect(): PDO
+    {
+        try {
+            $this->conn = new PDO("mysql:host={$this->servername};dbname={$this->dbname}", $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this->conn;
+        } catch (PDOException $err) {
+            return (object)['status' => 500, 'massage' => $err->getMessage()];
+        }
     }
     /**
      * @return void
      */
     public function closeConnect(): void
     {
-        $this->connResult->close();
+        $this->conn = null;
     }
 }

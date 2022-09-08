@@ -2,11 +2,21 @@
 
 use MyApp\Database\DbObject;
 
-require_once dirname(__DIR__) . '../bloodDonationProjectCS60/MyApp/Include/Autoload.php';
+require_once dirname(__DIR__) . ('../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
 
 $db = new DbObject();
-$result = $db->openConnect();
+$query = $db->openConnect();
 
-echo '<pre>';
-print_r($result);
-echo '</pre>';
+$username = "pugHaHa";
+$password = "pug1234";
+
+
+
+?>
+
+
+<?php require_once ('../bloodDonationProjectCS60/MyApp/Template/Home/Layout/header.php'); ?>
+
+
+
+<?php require_once ('../bloodDonationProjectCS60/MyApp/Template/Home/Layout/footer.php'); ?>
