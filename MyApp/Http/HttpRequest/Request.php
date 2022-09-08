@@ -4,15 +4,31 @@ namespace MyApp\Http\HttpRequest;
 
 class Request
 {
-    private $request = null; 
-
-    public function __construct()
+    private static array $requests = []; 
+    /**
+     * @return self
+     */
+    public static function multiple(): self
     {
-        
+        $post = isset($_POST) ? $_POST : [];
+        $get = isset($_GET) ? $_GET : [];
+        $files = isset($_FILES) ? $_FILES : [];
+
+        self::$requests = array_merge($post, $get, $files);
+        return new self;
     }
-
-    public function multiple(): void
+    /**
+     * @return array
+     */
+    public function toArray(): array
     {
-        $postRequest = $_POST;
+        return self::$requests;
+    }
+    /**
+     * @return object
+     */
+    public function toStdClass(): object
+    {
+        return (object)self::$requests;
     }
 }
