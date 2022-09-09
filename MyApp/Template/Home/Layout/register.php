@@ -149,12 +149,6 @@
                                 <input type="phone" class="form-control" id="phoneNumber" name="phoneNumber">
                             </div>
                         </div>
-
-
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="img_users">Upload</label>
-                            <input type="file" class="form-control" id="img_users" name="img_users">
-                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">ลงทะเบียน</button>
                 </form>
