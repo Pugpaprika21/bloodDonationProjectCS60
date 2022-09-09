@@ -1,6 +1,6 @@
 <div class="container">
     <div class="d-flex justify-content-center">
-        <div class="card shadow rounded card-top" style="width: 60rem;">
+        <div class="card shadow rounded card-top" style="width: 50rem;">
             <div class="card-header card-top-header">
                 Register
             </div>
@@ -40,7 +40,7 @@
                             <div class="input-group mb-2">
                                 <label class="input-group-text" for="gender">เพศ</label>
                                 <select class="form-select" id="gender" name="gender">
-                                    <option>เลือก...</option>
+                                    <option>---- เลือก ----</option>
                                     <option value="male">ชาย</option>
                                     <option value="female">หญิง</option>
                                 </select>
@@ -57,7 +57,7 @@
                             <div class="input-group mb-2">
                                 <label class="input-group-text" for="bloodType">กรุ๊ปเลือด</label>
                                 <select class="form-select" id="bloodType" name="bloodType">
-                                    <option>เลือก...</option>
+                                    <option>---- เลือก ----</option>
                                     <option value="A+">หมู่เลือด A+</option>
                                     <option value="B+">หมู่เลือด B+</option>
                                     <option value="AB+">หมู่เลือด AB+</option>
@@ -125,7 +125,7 @@
                                 <input type="text" class="form-control" id="postCode" name="postCode">
                             </div>
                         </div>
-                        
+
                         <!--  -->
                         <div class="text-contact-information">
                             ข้อมูลการติดต่อ ----
@@ -149,10 +149,25 @@
                                 <input type="phone" class="form-control" id="phoneNumber" name="phoneNumber">
                             </div>
                         </div>
+
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="img_users">Upload</label>
+                            <input type="file" class="form-control" id="img_users" name="img_users">
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">ลงทะเบียน</button>
                 </form>
             </div>
         </div>
     </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="card shadow rounded card-buttom" style="width: 50rem;">
+            <div class="card-body">
+                กลับสู่หน้าล็อคอิน <a href="../../../../../bloodDonationProjectCS60/index.php" class="link-primary">ย้อนกลับ</a>
+            </div>
+        </div>
+    </div>
+
 </div>

@@ -7,7 +7,11 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $request = Request::multiple()->toArray();
+    $request = Request::post()->toStdClass();
 
-    Response::render($request)->toArray();
+    
+    echo '<pre>';
+    print_r($request);
+    echo '</pre>';
+   //Response::render($request)->toArray();
 }

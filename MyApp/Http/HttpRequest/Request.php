@@ -4,46 +4,66 @@ namespace MyApp\Http\HttpRequest;
 
 class Request
 {
-    private static array $requests = []; 
+    private static array $requestsArray = []; 
+    private static $requestsObject = null; 
+    /**
+     * @return self
+     */
+    public static function post(): self
+    {
+        $post = isset($_POST) ? $_POST : [];
+        foreach ($post as $postKey => $postVal) {
+            $post[$postKey] = htmlspecialchars(strip_tags($postVal));
+        }
+
+        self::$requestsArray = $post;
+        self::$requestsObject = (object)$post;
+        return new self;
+    }
+    /**
+     * @return self
+     */
+    public static function get(): self
+    {
+        $get = isset($_GET) ? $_GET : [];
+        foreach ($get as $getKey => $getVal) {
+            $get[$getKey] = htmlspecialchars(strip_tags($getVal));
+        }
+
+        self::$requestsArray = $get;
+        self::$requestsObject = (object)$get;
+        return new self;
+    }
     /**
      * @return self
      */
     public static function multiple(): self
     {
-        $postResult = [];
         $post = isset($_POST) ? $_POST : [];
         $get = isset($_GET) ? $_GET : [];
         $files = isset($_FILES) ? $_FILES : [];
 
-        self::$requests = array_merge($post, $get, $files);
+        $requestsArray = ['post' => $post, 'get' => $get, 'files' => $files];
+        $requestsObject = (object)['post' => (object)$post, 'get' => (object)$get, 'files' => (object)$files];
+        // foreach ($post as $postKey => $postVal) {
+        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
+        // }
+        self::$requestsArray = $requestsArray;
+        self::$requestsObject = $requestsObject;
         return new self;
-
-        // foreach ($post as $postKey => $postVal) {
-        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
-        // }
-
-        // foreach ($post as $postKey => $postVal) {
-        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
-        // }
-
-        // foreach ($post as $postKey => $postVal) {
-        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
-        // }
-
-        //$html = htmlspecialchars(strip_tags($_POST));
     }
     /**
      * @return array
      */
     public function toArray(): array
     {
-        return self::$requests;
+        return self::$requestsArray;
     }
     /**
      * @return object
      */
     public function toStdClass(): object
     {
-        return (object)self::$requests;
+        return self::$requestsObject;
     }
 }

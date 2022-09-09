@@ -20,7 +20,11 @@
         }
 
         .card-top {
-            margin-top: 60px;
+            margin-top: 35px;
+        }
+
+        .card-buttom {
+            margin-top: 20px;
         }
 
         .card-top-header {
