@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MyApp\Include;
 
-session_start();
+// session_start();
 
 class Autoloader
 {

@@ -6,9 +6,19 @@
     $(document).ready(function () {
         $('#form-register').submit(function (e) { 
             e.preventDefault();
+            const Fd = new FormData($(this)[0]);
 
-            console.log('hgahaha');
-            
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Home/web_RegisterController_register.php",
+                data: Fd,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log(response);
+                }
+            });
         });
     });
 </script>

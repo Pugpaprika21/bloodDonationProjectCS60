@@ -16,6 +16,7 @@
 
         .container {
             margin-top: 30px;
+            padding-bottom: 50px;
         }
 
         .card-top {
@@ -29,6 +30,20 @@
             font-size: 18px;
             color: #FFFFFF;
         }
+
+        .text-address-information {
+            margin-top: 5px;
+        }
+
+        .text-personal-information {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .text-contact-information {
+            margin-top: 5px;
+        }
+
     </style>
 </head>
 
