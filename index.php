@@ -17,14 +17,12 @@
                 $.ajax({
                     type: "POST",
                     dataType: "json",
-                    url: "url",
+                    url: "../bloodDonationProjectCS60/MyApp/Web/Home/web_LoginController_login.php",
                     data: {username: username, password: password},
                     success: function (response) {
-
                         if (response.status == 200) {
                             window.location.href = '../bloodDonationProjectCS60/MyApp/View/Users/home.php';
                         }
-        
                     }
                 });
             } 
