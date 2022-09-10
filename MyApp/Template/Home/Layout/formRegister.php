@@ -13,13 +13,13 @@
                         <div class="col-md-6">
                             <div class="input-group mb-2">
                                 <span class="input-group-text">ชื่อผู้ใช้</span>
-                                <input type="text" class="form-control" id="username" name="username" placeholder="username">
+                                <input type="text" class="form-control" id="username" name="username" maxlength="10" placeholder="username">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group mb-2">
                                 <span class="input-group-text">รหัสผ่าน</span>
-                                <input type="text" class="form-control" id="password" name="password" placeholder="password">
+                                <input type="text" class="form-control" id="password" name="password" maxlength="10" placeholder="password">
                             </div>
                         </div>
                         <!--  -->
@@ -146,7 +146,7 @@
                         <div class="col-md-6 mb-4">
                             <div class="input-group mb-2">
                                 <span class="input-group-text">หมายเลขโทรศัพท์</span>
-                                <input type="phone" class="form-control" id="phoneNumber" name="phoneNumber">
+                                <input type="phone" class="form-control" id="phoneNumber" name="phoneNumber" maxlength="10">
                             </div>
                         </div>
                     </div>

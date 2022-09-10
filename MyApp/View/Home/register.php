@@ -1,5 +1,5 @@
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Home/Layout/header.php'); ?>
-<?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Home/Layout/register.php'); ?>
+<?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Home/Layout/formRegister.php'); ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Home/Layout/footer.php'); ?>
 
 <script>
@@ -17,8 +17,6 @@
                 processData: false,
                 success: function (response) {
                     console.log(response);
-                    
-
                 }
             });
         });
