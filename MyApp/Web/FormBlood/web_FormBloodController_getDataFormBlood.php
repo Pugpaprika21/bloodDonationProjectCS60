@@ -1,0 +1,12 @@
+<?php
+
+use MyApp\Controllers\FormBlood\FormBloodController;
+use MyApp\Http\HttpRequest\Request;
+
+require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $request = Request::post()->toStdClass();
+    $callFormBloodController = (new FormBloodController())->getDataFormBlood($request);
+}

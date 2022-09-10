@@ -31,6 +31,7 @@ class LoginController
             $_SESSION['user_id'] = $query[0]->user_id;
             $_SESSION['username'] = $query[0]->username;
             $_SESSION['password'] = $query[0]->password;
+            $_SESSION['gender'] = $query[0]->gender;
             $_SESSION['role'] = $query[0]->role;
 
             Response::success();

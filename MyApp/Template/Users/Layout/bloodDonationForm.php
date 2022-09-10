@@ -1,7 +1,8 @@
 <style>
     .card-bloodDonationForm {
         margin-top: 15px;
-        border: none;
+        /* width: 100rem;
+        border: none; */
     }
 
     .card-header-bloodDonationForm {
@@ -14,7 +15,7 @@
 </style>
 
 <div class="d-flex justify-content-center">
-    <div class="card card-bloodDonationForm" style="width: 100rem;">
+    <div class="card card-bloodDonationForm">
         <div class="card-header card-header-bloodDonationForm">
             แบบฟอร์มบริจาคโลหิต
         </div>
