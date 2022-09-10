@@ -20,13 +20,14 @@
                     url: "url",
                     data: {username: username, password: password},
                     success: function (response) {
-                        console.log(response);
+
+                        if (response.status == 200) {
+                            window.location.href = '../bloodDonationProjectCS60/MyApp/View/Users/home.php';
+                        }
+        
                     }
                 });
-
-            } else {
-                
-            }
+            } 
         });
     });
 

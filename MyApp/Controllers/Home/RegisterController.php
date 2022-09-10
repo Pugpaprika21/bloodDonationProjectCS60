@@ -51,7 +51,6 @@ class RegisterController
             if ($query) {
                 Response::success();
             }
-
         } else {
             Response::error('username password is unique!');
         }
@@ -78,5 +77,12 @@ class RegisterController
         }
 
         return $result;
+    }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function getProvinceToOption(object $request): void
+    {
     }
 }
