@@ -2,8 +2,6 @@
 
 namespace MyApp\Controllers\FormBlood;
 
-session_start();
-
 use MyApp\Helper\Tool\StringDifferent;
 use MyApp\Http\HttpResponse\Response;
 use MyApp\QueryBuilder\AppQuery\Query;
@@ -18,33 +16,30 @@ class FormBloodController
      */
     public function getDataFormBlood(object $request): void
     {
-        Response::render((array)$request)->toArray();
-        // $form_id = date('d') . date('m') . (date('Y') + 543);
-        // $sql = "SELECT form_id FROM formblood_tb WHERE form_id =:form_id";
-        // $query = (new Query())->select($sql, [
-        //     'form_id' => $form_id
-        // ]);
+        $strClean = new StringDifferent();
 
-        // $str = new StringDifferent();
-        // $sqlStr = $str::letter($request);
+        $sql = "SELECT form_id FROM formblood_tb WHERE form_id =:form_id";
 
-        // $arrayData = (array)$sqlStr->data;
-        // $arrayData['formStatus'] = 1;
-        // $arrayData['user_id'] = $_SESSION['user_id'];
+        $query = (new Query())->select($sql, [
+            'form_id' => $strClean->clean($request->form_id)
+        ]);
 
-        // $pos = 0;
-        // $resultRequest = array_slice($arrayData, 0, $pos) + ['form_id' => $form_id] + array_slice($arrayData, $pos);
+        if (isset($query[0]->form_id) == $request->form_id) {
 
-        // if (count($query) > 0) {
-        //     Response::error();
-        // } else {
+            Response::error('error');
 
-        //     $sql = "INSERT INTO formblood_tb($sqlStr->fields) VALUES($sqlStr->values)";
+        } else {
 
-        //     echo '<pre>';
-        //     print_r($sql);
-        //     echo '</pre>';
+            $str = $strClean::letter($request);
+            $column = $str->column;
+            $rows = $str->rows;
+            $dataRequest = $str->dataRequest;
+            $sql = "INSERT INTO formblood_tb($column) VALUES($rows)";
+            $query = (new Query())->insert($sql, (array)$dataRequest);
 
-        // }
+            if ($query) {
+                Response::success();
+            }
+        }
     }
 }

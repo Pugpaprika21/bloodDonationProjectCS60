@@ -68,7 +68,7 @@
 
 <div class="container">
     <form method="post" id="formBlood-submit">
-        <input type="hidden" id="form_id" name="form_id" value="<?= date('d') . date('m') . (date('Y') + 543); ?>">
+        <input type="hidden" id="form_id" name="form_id" value="<?= (string)('FB' . date('d') . date('m') . (date('Y') + 543)); ?>">
         <div class="d-flex justify-content-center">
             <!-- card-main-bloodDonationForm1 | general health category -->
             <div class="card card-main-bloodDonationForm1 shadow-sm rounded">
@@ -367,6 +367,8 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="formStatus" name="formStatus" value="1">
+        <input type="hidden" id="user_id" name="user_id" value="<?= $_SESSION['user_id']; ?>">
     </form>
 </div>
 
@@ -378,10 +380,6 @@
         $('#formBlood-submit').submit(function(e) {
             e.preventDefault();
             const Fd = new FormData($(this)[0]);
-            Fd.append('form_id', $('#form_id').val());
-            Fd.append('formStatus', '1');
-            Fd.append('user_id', '<?= $_SESSION['user_id']; ?>');
-
             $.ajax({
                 type: "POST",
                 dataType: "json",

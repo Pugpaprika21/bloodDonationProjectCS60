@@ -19,18 +19,23 @@ class StringDifferent
      */
     public static function letter(object $request_sql): object
     {
-        $fields = [];
+        $column = []; 
+        $rows = [];
         $values = [];
 
+        $str = new StringDifferent();
+
         foreach ($request_sql as $key => $value) {
-            $fields[] = $key;
-            $values[] = ':' . $value;
+            $column[] = $str->clean($key);
+            $rows[] = ':' . $str->clean($key);
+            $values[] = ':' . $str->clean($value);
         }
 
         return (object)[
-            'fields' => implode(', ', $fields),
+            'column' => implode(', ', $column),
+            'rows' => implode(', ', $rows),
             'values' => implode(', ', $values),
-            'data' => (object)$request_sql
+            'dataRequest' => (object)$request_sql
         ];
     }
 }

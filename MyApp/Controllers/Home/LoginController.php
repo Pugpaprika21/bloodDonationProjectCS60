@@ -19,7 +19,7 @@ class LoginController
     public function login(object $request): void
     {
         $str = new StringDifferent();
-        $sql = "SELECT user_id, username, password, role FROM user_tb WHERE username =:username AND password =:password";
+        $sql = "SELECT user_id, username, password, gender, role FROM user_tb WHERE username =:username AND password =:password";
 
         $query = (new Query())->select($sql, [
             'username' => $str->clean($request->username),
