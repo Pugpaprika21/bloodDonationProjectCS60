@@ -43,10 +43,10 @@
                 </svg> นัดหมายบริจาคโลหิต
             </div>
             <div class="card-body">
-                <!--  -->
+
                 <div class="row g-3">
                     <div class="col-sm-4">
-                        <!--  -->
+        
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d1">
                                 วันที่ :
@@ -57,10 +57,10 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal1.php'); ?>
                             </div>
                         </div>
-                        <!--  -->
+        
                     </div>
                     <div class="col-sm-4">
-                        <!--  -->
+        
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d2">
                                 วันที่ :
@@ -71,10 +71,10 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal2.php'); ?>
                             </div>
                         </div>
-                        <!--  -->
+        
                     </div>
                     <div class="col-sm-4">
-                        <!--  -->
+        
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d3">
                                 วันที่ :
@@ -85,11 +85,11 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal3.php'); ?>
                             </div>
                         </div>
-                        <!--  -->
+        
                     </div>
 
                     <div class="col-sm-4">
-                        <!--  -->
+        
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d4">
                                 วันที่ :
@@ -100,10 +100,10 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal4.php'); ?>
                             </div>
                         </div>
-                        <!--  -->
+        
                     </div>
                     <div class="col-sm-4">
-                        <!--  -->
+        
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d5">
                                 วันที่ :
@@ -114,10 +114,10 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal5.php'); ?>
                             </div>
                         </div>
-                        <!--  -->
+        
                     </div>
                     <div class="col-sm-4">
-                        <!--  -->
+        
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d6">
                                 วันที่ :
@@ -128,14 +128,16 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal6.php'); ?>
                             </div>
                         </div>
-                        <!--  -->
+        
                     </div>
                 </div>
-                <!--  -->
+
             </div>
         </div>
     </div>
 </div>
+
+<a href=""></a>
 
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Layout/footer.php'); ?>
 
@@ -179,32 +181,45 @@
             });
         })();
 
-        $('#submit-modal1').submit(function (e) { 
+        var postURL = '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_getAppointmentsData.php';
+
+        $('#submit-modal1').submit(function(e) {
             e.preventDefault();
-            console.log('hahaha 1');
+            const Fd = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: postURL,
+                data: Fd,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         });
 
-        $('#submit-modal2').submit(function (e) { 
+        $('#submit-modal2').submit(function(e) {
             e.preventDefault();
             console.log('hahaha 2');
         });
 
-        $('#submit-modal3').submit(function (e) { 
+        $('#submit-modal3').submit(function(e) {
             e.preventDefault();
             console.log('hahaha 3');
         });
 
-        $('#submit-modal4').submit(function (e) { 
+        $('#submit-modal4').submit(function(e) {
             e.preventDefault();
             console.log('hahaha 4');
         });
 
-        $('#submit-modal5').submit(function (e) { 
+        $('#submit-modal5').submit(function(e) {
             e.preventDefault();
             console.log('hahaha 5');
         });
 
-        $('#submit-modal6').submit(function (e) { 
+        $('#submit-modal6').submit(function(e) {
             e.preventDefault();
             console.log('hahaha 6');
         });
@@ -221,5 +236,4 @@
             return result;
         }
     });
-
 </script>

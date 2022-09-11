@@ -2,8 +2,11 @@
 
 namespace MyApp\Controllers\Appointments;
 
+session_start();
+
 use MyApp\Helper\Date\DateThai;
 use MyApp\Http\HttpResponse\Response;
+use MyApp\QueryBuilder\AppQuery\Query;
 
 require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
 
@@ -35,11 +38,29 @@ class MakingAppointmentsController
             'day6' => $dateThai->addDate('+ 6 days')->getdayAdd()
         ];
 
+        $_SESSION['days'] = $arrayDateAdd;
+
         Response::render($arrayDateAdd)->jsonString(); 
     }
 
     public function countTotalUsersAppointments(): void
     {
-        
+
+    }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function getAppointmentsData(object $request): void
+    {
+        $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationStatus, :user_id)";
+        // $query = (new Query())->insert($sql, [
+        //     'dateApp' => $request->dateApp,
+        //     'durationApp' => $request->durationApp,
+        //     'durationStatus' => $request->durationStatus,
+        //     'user_id' => $request->user_id,
+        // ]);
+
+        Response::render((array)$request)->jsonString();
     }
 }
