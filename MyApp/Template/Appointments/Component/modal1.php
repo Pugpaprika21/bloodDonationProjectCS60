@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <input type="hidden" name="dateApp" id="dateApp" value="<?= $_SESSION['days']['day1']; ?>">
                     <select class="form-select" id="durationApp" name="durationApp">
-                        <option selected>เลือกช่วงเวลาการนัดหมาย</option>
+                        <option value="notSelect">---- เลือกช่วงเวลาการนัดหมาย ----</option>
                         <option value="morning">ช่วงเช้า</option>
                         <option value="afternoon">ช่วงบ่าย</option>
                     </select>
