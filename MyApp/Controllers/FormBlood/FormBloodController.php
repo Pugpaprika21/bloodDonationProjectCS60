@@ -2,6 +2,7 @@
 
 namespace MyApp\Controllers\FormBlood;
 
+use MyApp\Helper\Date\DateThai;
 use MyApp\Helper\Tool\StringDifferent;
 use MyApp\Http\HttpResponse\Response;
 use MyApp\QueryBuilder\AppQuery\Query;
@@ -26,7 +27,10 @@ class FormBloodController
 
         if (isset($query[0]->form_id) == $request->form_id) {
 
-            Response::error('error');
+            $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . '+1 days'));
+            $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
+
+            Response::error('กรุณาทำเเบบสอบถามเเสดงความประสงค์บริจาคโลหิตในวันที่ ' . $dayMonthYearTomorrow);
 
         } else {
 

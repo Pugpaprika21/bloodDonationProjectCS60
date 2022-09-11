@@ -4,6 +4,9 @@ namespace MyApp\Helper\Date;
 
 class DateThai
 {
+    private string $dayMonthYearCut = '';
+    private string $monthYearFull = '';
+
     private array $strMonthCut = [
         "", "ม.ค.", "ก.พ.", "มี.ค.", "เม.ย.", "พ.ค.", "มิ.ย.", "ก.ค.", "ส.ค.", "ก.ย.", "ต.ค.", "พ.ย.", "ธ.ค."
     ];
@@ -49,6 +52,22 @@ class DateThai
             'dayMonthYearCut' => $strDay . ' ' . $strMonthThai . ' ' . substr($strYear, 2)
         ];
 
-        return $result;
+        $this->monthYearFull = $strFullMonthThai . ' ' . $strYear;
+        $this->dayMonthYearCut = $strDay . ' ' . $strMonthThai . ' ' . substr($strYear, 2);
+        return $this;
+    }
+    /**
+     * @return string
+     */
+    public function monthYearFull(): string
+    {
+        return $this->monthYearFull;
+    }
+    /**
+     * @return string
+     */
+    public function dayMonthYearCut(): string
+    {
+        return $this->dayMonthYearCut;
     }
 }
