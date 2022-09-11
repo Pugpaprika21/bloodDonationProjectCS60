@@ -1,6 +1,6 @@
 <?php
 
-use MyApp\Controllers\Home\LoginController;
+use MyApp\Controllers\Appointments\MakingAppointmentsController;
 use MyApp\Http\HttpRequest\Request;
 
 require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
@@ -8,5 +8,5 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $request = Request::post()->toStdClass();
-    (new LoginController())->login($request);
+    (new MakingAppointmentsController())->createTimeThai($request);
 }

@@ -8,5 +8,5 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $request = Request::post()->toStdClass();
-    $callFormBloodController = (new FormBloodController())->getDataFormBlood($request);
+    (new FormBloodController())->getDataFormBlood($request);
 }

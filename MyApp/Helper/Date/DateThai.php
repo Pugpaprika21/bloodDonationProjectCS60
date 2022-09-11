@@ -4,6 +4,7 @@ namespace MyApp\Helper\Date;
 
 class DateThai
 {
+    private string $dateResultAdd = '';
     private string $dayMonthYearCut = '';
     private string $monthYearFull = '';
 
@@ -25,6 +26,16 @@ class DateThai
             'month' => date('m'),
             'year' => date('Y'),
         ];
+    }
+    /**
+     * + 1 days
+     * @param string $addDays 
+     * @return object
+     */
+    public function addDate(string $addDays): object
+    {
+        $this->dateResultAdd = date('Y-m-d', strtotime(date('Y-m-d') . $addDays));
+        return $this;
     }
     /**
      * Thai Format
@@ -55,6 +66,13 @@ class DateThai
         $this->monthYearFull = $strFullMonthThai . ' ' . $strYear;
         $this->dayMonthYearCut = $strDay . ' ' . $strMonthThai . ' ' . substr($strYear, 2);
         return $this;
+    }
+    /**
+     * @return string
+     */
+    public function getdayAdd(): string
+    {
+        return $this->dateResultAdd;
     }
     /**
      * @return string

@@ -71,7 +71,7 @@
         <input type="hidden" id="form_id" name="form_id" value="<?= (string)('FB' . date('d') . date('m') . (date('Y') + 543)); ?>">
         <div class="d-flex justify-content-center">
             <!-- card-main-bloodDonationForm1 | general health category -->
-            <div class="card card-main-bloodDonationForm1 shadow-sm rounded">
+            <div class="card card-main-bloodDonationForm1 shadow rounded">
                 <div class="card-header card-header-bloodDonationForm1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
                         <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
@@ -151,7 +151,7 @@
         <!-- card-main-bloodDonationForm2 -->
         <div class="d-flex justify-content-center">
             <!-- card-main-bloodDonationForm2 | Category : Pregnancy / Maternity -->
-            <div class="card card-main-bloodDonationForm2 shadow-sm rounded">
+            <div class="card card-main-bloodDonationForm2 shadow rounded">
                 <div class="card-header card-header-bloodDonationForm2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-female" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z" />
@@ -191,7 +191,7 @@
         <!-- card-main-bloodDonationForm3 -->
         <div class="d-flex justify-content-center">
             <!-- card-main-bloodDonationForm3 | Category : History of Sex -->
-            <div class="card card-main-bloodDonationForm3 shadow-sm rounded">
+            <div class="card card-main-bloodDonationForm3 shadow rounded">
                 <div class="card-header card-header-bloodDonationForm3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
@@ -233,7 +233,7 @@
         <!-- card-main-bloodDonationForm4 -->
         <div class="d-flex justify-content-center">
             <!-- card-main-bloodDonationForm4 | Category : History of risk of various infections -->
-            <div class="card card-main-bloodDonationForm4 shadow-sm rounded">
+            <div class="card card-main-bloodDonationForm4 shadow rounded">
                 <div class="card-header card-header-bloodDonationForm4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
@@ -372,9 +372,9 @@
     </form>
 </div>
 
-<?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
+<!-- bloodDonationForm.php -->
 
-<a href="../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php"></a>
+<?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
 
 <script>
     $(document).ready(function() {
