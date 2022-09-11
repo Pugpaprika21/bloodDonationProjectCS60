@@ -374,21 +374,59 @@
 
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
 
+<a href="../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php"></a>
+
 <script>
     $(document).ready(function() {
 
         $('#formBlood-submit').submit(function(e) {
             e.preventDefault();
-            const Fd = new FormData($(this)[0]);
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_getDataFormBlood.php",
-                data: Fd,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
+            
+            let form_id = $('#form_id').val();
+            Swal.fire({
+                title: 'Are you sure?',
+                text: `คุณต้องการบันทึก เเบบสอบถามเเสดงความประสงค์บริจาคโลหิต เลขที่ ${form_id} หรือไม่`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const Fd = new FormData($(this)[0]);
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_getDataFormBlood.php",
+                        data: Fd,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            let status = response.status;
+                            let massage = response.massage;
+
+                            if (status == 200) {
+                                Swal.fire(
+                                    'สำเร็จ',
+                                    'บันทึกข้อมูลสำเร็จ',
+                                    'success'
+                                ).then((result) => {
+                                    let urlBooking = `../../../../bloodDonationProjectCS60/MyApp/View/Appointments/makingAppointment.php?status=${massage}&form_id=${form_id}`;
+                                    window.location.href = urlBooking;
+                                });
+
+                            } else {
+                                Swal.fire(
+                                    'ไม่สำเร็จ',
+                                    `บันทึกข้อมูลไม่สำเร็จ ${massage}`,
+                                    'error'
+                                ).then((result) => {
+                                    let urlBooking = `../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php`;
+                                    window.location.href = urlBooking;
+                                });
+                            }
+                        }
+                    });
                 }
             });
         });

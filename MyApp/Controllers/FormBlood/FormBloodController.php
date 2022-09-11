@@ -18,9 +18,7 @@ class FormBloodController
     public function getDataFormBlood(object $request): void
     {
         $strClean = new StringDifferent();
-
         $sql = "SELECT form_id FROM formblood_tb WHERE form_id =:form_id";
-
         $query = (new Query())->select($sql, [
             'form_id' => $strClean->clean($request->form_id)
         ]);
@@ -35,11 +33,8 @@ class FormBloodController
         } else {
 
             $str = $strClean::letter($request);
-            $column = $str->column;
-            $rows = $str->rows;
-            $dataRequest = $str->dataRequest;
-            $sql = "INSERT INTO formblood_tb($column) VALUES($rows)";
-            $query = (new Query())->insert($sql, (array)$dataRequest);
+            $sql = "INSERT INTO formblood_tb($str->column) VALUES($str->rows)";
+            $query = (new Query())->insert($sql, (array)$str->dataRequest);
 
             if ($query) {
                 Response::success();
