@@ -83,12 +83,11 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
                     <div class="tab-content" id="myTabContent">
                         <!-- ข้อมูลการนัดหมาย -->
                         <div class="tab-pane fade show active" id="appointmentsShowData-tab-pane" role="tabpanel" aria-labelledby="appointmentsShowData-tab" tabindex="0">
-
                             <table class="table table-bordered text-center display" id="appointmentsShowData" style="width:100%">
                                 <thead style="background-color: #0F3D81; color: #FFFFFF;">
                                     <tr>
                                         <td>#</td>
-                                        <td>วันที่นัดมหาย</td>
+                                        <td>วันที่นัดหมาย</td>
                                         <td>ช่วงการนัดหมาย</td>
                                         <td>เวลาการนัดหมาย</td>
                                         <td>สถานะ</td>
@@ -102,15 +101,14 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
                                             <td><?= $values->durationApp; ?></td>
                                             <td><?= $values->durationTime; ?></td>
                                             <?php if ($values->durationStatus == 0) : ?>
-                                                <td><button type="button" class="btn btn-warning btn-sm">ยังไม่นัดหมาย</button></td>
+                                                <td><button type="button" class="btn btn-warning btn-sm text-dark">ยังไม่นัดหมาย</button></td>
                                             <?php elseif ($values->durationStatus == 1) : ?>
-                                                <td><button type="button" class="btn btn-success btn-sm">นัดหมายสำเร็จ</button></td>
+                                                <td><button type="button" class="btn btn-success btn-sm text-white">นัดหมายสำเร็จ</button></td>
                                             <?php endif; ?>
                                         </tr>
                                     <?php $i++; endforeach; ?>
                                 </tbody>
                             </table>
-
                         </div>
                         <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
                         <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>

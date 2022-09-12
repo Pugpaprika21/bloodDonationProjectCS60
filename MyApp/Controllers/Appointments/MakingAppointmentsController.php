@@ -46,28 +46,28 @@ class MakingAppointmentsController
             'user_id' => $str->clean($request->user_id)
         ]);
 
-        // if (isset($query[0]->dateApp) == $request->dateApp) {
+        if (isset($query[0]->dateApp) == $request->dateApp) {
 
-        //     $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . '+3 days'));
-        //     $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
+            $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . '+3 days'));
+            $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
-        //     Response::error('นัดหมายบริจาคโลหิตได้อีกภายในที่ ' . $dayMonthYearTomorrow);
-        // } else {
+            Response::error('นัดหมายบริจาคโลหิตได้อีกภายในที่ ' . $dayMonthYearTomorrow);
+        } else {
 
-        //     $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
+            $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
 
-        //     $query = (new Query())->insert($sql, [
-        //         'dateApp' => $str->clean($request->dateApp),
-        //         'durationApp' => $str->clean($request->durationApp),
-        //         'durationTime' => $str->clean($request->durationTime),
-        //         'durationStatus' => $str->clean($request->durationStatus),
-        //         'user_id' => $str->clean($request->user_id)
-        //     ]);
+            $query = (new Query())->insert($sql, [
+                'dateApp' => $str->clean($request->dateApp),
+                'durationApp' => $str->clean($request->durationApp),
+                'durationTime' => $str->clean($request->durationTime),
+                'durationStatus' => $str->clean($request->durationStatus),
+                'user_id' => $str->clean($request->user_id)
+            ]);
 
-        //     if ($query) {
-        //         Response::success();
-        //     }
-        // }
+            if ($query) {
+                Response::success();
+            }
+        }
 
         $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
 
