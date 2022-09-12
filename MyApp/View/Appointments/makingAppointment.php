@@ -71,7 +71,7 @@ $arrayDateAdd = [
                             <div class="card-header card-header-showDateThai" id="d1">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
                                     <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
-                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day1'])->dayMonthYearCut(); ?> 
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day1'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -169,8 +169,6 @@ $arrayDateAdd = [
     </div>
 </div>
 
-<a href=""></a>
-
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Layout/footer.php'); ?>
 
 <script>
@@ -192,54 +190,85 @@ $arrayDateAdd = [
 
         $('#submit-modal1').submit(function(e) {
             e.preventDefault();
-            if ($('#durationApp').val() !== 'notSelect') {
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: postURL,
-                    data: {
-                        dateApp: $('#dateApp').val(),
-                        durationApp: $('#durationApp').val(),
-                        durationStatus: $('#durationStatus').val(),
-                        user_id: $('#user_id').val()
-                    },
-                    success: function(response) {
-                        console.log(response);
-                    }
-                });
-
-            } else {
-
-            }
+            sendData(this);
         });
 
         $('#submit-modal2').submit(function(e) {
             e.preventDefault();
-            console.log('hahaha 2');
+            sendData(this);
         });
 
         $('#submit-modal3').submit(function(e) {
             e.preventDefault();
-            console.log('hahaha 3');
+            sendData(this);
         });
 
         $('#submit-modal4').submit(function(e) {
             e.preventDefault();
-            console.log('hahaha 4');
+            sendData(this);
         });
 
         $('#submit-modal5').submit(function(e) {
             e.preventDefault();
-            console.log('hahaha 5');
+            sendData(this);
         });
 
         $('#submit-modal6').submit(function(e) {
-            e.preventDefault();
-            console.log('hahaha 6');
+            sendData(this);
         });
 
-        function swalMessage() {
+        function sendData(_this) {
+            const Fd = new FormData($(_this)[0]);
+            Fd.append('dateApp', $('#dateApp').val());
+            Fd.append('durationApp', $('#durationApp').val());
+            Fd.append('durationTime', ($('#durationApp').val() == 'morning') ? '8.30 ถึง 11.30 น.' : '13.00 ถึง 16.30 น.');
+            Fd.append('durationStatus', $('#durationStatus').val());
+            Fd.append('user_id', $('#user_id').val());
 
+            if (Fd.get('durationApp') !== null) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: postURL,
+                    data: Fd,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+
+                        let status = response.status;
+                        let massage = response.massage;
+
+                        console.log(response);
+
+                        if (status == 200) {
+                            window.location.reload();
+                            // let url = `../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php?massage=${massage}`;
+                            // swalMessage(_this, 'สำเร็จ', 'บันทึกข้อมูลสำเร็จ', 'success', url);
+
+                        } else {
+                            swalMessage(_this, 'ผิดพลาด', massage, 'error');
+                        }
+                    }
+                });
+
+            } else {
+                swalMessage(_this, 'คำเตือน', 'กรุณาเลือกช่วงเวลานัดหมาย', 'warning');
+            }
+        }
+
+        function swalMessage(_this = {}, title, message, icon, url = '') {
+
+            if (url !== '') {
+                //window.location.href = url;
+            } else {
+                Swal.fire(
+                    title,
+                    message,
+                    icon
+                ).then((result) => {
+                    $(_this)[0].reset();
+                });
+            }
         }
     });
 </script>

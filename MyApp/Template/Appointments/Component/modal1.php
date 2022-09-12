@@ -13,19 +13,16 @@
                 <div class="modal-body">
                     <input type="hidden" name="dateApp" id="dateApp" value="<?= $arrayDateAdd['day1']; ?>">
                     <select class="form-select" id="durationApp" name="durationApp">
-                        <option value="notSelect">---- เลือกช่วงเวลาการนัดหมาย ----</option>
-                        <option value="morning">ช่วงเช้า</option>
-                        <option value="afternoon">ช่วงบ่าย</option>
-                    </select>
+                        <option disabled>---- เลือกช่วงเวลาการนัดหมาย ----</option>
+                        <option value="morning">ช่วงเช้า : 8.30 ถึง 11.30 น.</option>
+                        <option value="afternoon">ช่วงบ่าย : 13.00 ถึง 16.30 น.</option>
+                    </select> 
                     <input type="hidden" name="durationStatus" id="durationStatus" value="0">
                     <input type="hidden" name="user_id" id="user_id" value="<?= $_SESSION['user_id']; ?>">
-                    <div class="detail mt-3">
-                            rererere
-                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </form>
