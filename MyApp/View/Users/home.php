@@ -95,8 +95,7 @@ $formblood_tb = $_SESSION['formblood_tb'] ? $_SESSION['formblood_tb'] : [];
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = 0;
-                                    foreach ($makingappointments_tb as $key => $values) : ?>
+                                    <?php $i = 0; foreach ($makingappointments_tb as $key => $values) : ?>
                                         <tr>
                                             <td><?= ($i + 1); ?></td>
                                             <td><?= $dateThai->get($values->dateApp)->dayMonthYearCut(); ?></td>
@@ -108,8 +107,7 @@ $formblood_tb = $_SESSION['formblood_tb'] ? $_SESSION['formblood_tb'] : [];
                                                 <td><span class="badge text-bg-success">นัดหมายสำเร็จ</span></td>
                                             <?php endif; ?>
                                         </tr>
-                                    <?php $i++;
-                                    endforeach; ?>
+                                    <?php $i++; endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
