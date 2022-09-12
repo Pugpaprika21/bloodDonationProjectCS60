@@ -19,6 +19,11 @@ $radioCheck = isset($_SESSION['formblood_tb_all']) ? $_SESSION['formblood_tb_all
         align-items: center;
     }
 
+    .card-btn-back {
+        width: 60rem;
+        margin-bottom: 20px;
+    }
+
     .card-main-bloodDonationForm1 {
         width: 60rem;
         border-color: #DA8F79;
@@ -73,6 +78,17 @@ $radioCheck = isset($_SESSION['formblood_tb_all']) ? $_SESSION['formblood_tb_all
 </style>
 
 <div class="container">
+
+    <div class="d-flex justify-content-center">
+        <div class="card card-btn-back shadow rounded">
+            <div class="card-body">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a class="btn btn-primary me-md-2 btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php" role="button">ย้อนกลับ</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="d-flex justify-content-center">
         <!-- card-main-bloodDonationForm1 | general health category -->
         <div class="card card-main-bloodDonationForm1 shadow rounded">
@@ -545,7 +561,6 @@ $radioCheck = isset($_SESSION['formblood_tb_all']) ? $_SESSION['formblood_tb_all
             </div>
         </div>
     </div>
-
 </div>
 
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
@@ -556,23 +571,18 @@ $radioCheck = isset($_SESSION['formblood_tb_all']) ? $_SESSION['formblood_tb_all
 
         var getUrl = urlSearchParams('form_id');
 
-        function getFormBloodData() {
-            setInterval(function() {
-                $.ajax({
-                    type: "GET",
-                    dataType: "json",
-                    url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBloodByID.php",
-                    data: {
-                        form_id: getUrl
-                    },
-                    success: function(response) {
-                        // ...
-                    }
-                });
-            }, 1000);
-        }
-
-        getFormBloodData();
-
+        (function() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBloodByID.php",
+                data: {
+                    form_id: getUrl
+                },
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        })();
     });
 </script>

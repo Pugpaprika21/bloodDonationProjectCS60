@@ -33,7 +33,6 @@ class FormBloodController
                 ->dayMonthYearCut();
 
             Response::error('กรุณาทำเเบบสอบถามเเสดงความประสงค์บริจาคโลหิตในวันที่ ' . $dayMonthYearTomorrow);
-
         } else {
 
             $str = $strClean::letter($request);
@@ -57,6 +56,7 @@ class FormBloodController
         ]);
 
         if (count($query) > 0) {
+            unset($_SESSION['formblood_tb']);
             $_SESSION['formblood_tb'] = $query;
             Response::success();
         } else {
@@ -85,6 +85,3 @@ class FormBloodController
         }
     }
 }
-
-
-

@@ -8,8 +8,8 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 
 $dateThai = new DateThai();
 
-$makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['makingappointments_tb'] : [];
-$formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [];
+$makingappointments_tb = $_SESSION['makingappointments_tb'] ? $_SESSION['makingappointments_tb'] : [];
+$formblood_tb = $_SESSION['formblood_tb'] ? $_SESSION['formblood_tb'] : [];
 
 ?>
 <?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
@@ -172,7 +172,6 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                 success: function(response) {
                     if (response.status == 200) {
                         fnDataTable('#appointmentsShowData');
-                        fnDataTable('#formBloodData');
                     }
                 }
             });

@@ -105,6 +105,7 @@ class MakingAppointmentsController
         $query = (new Query())->select($sql, ['user_id' => $request->user_id]);
 
         if (count($query) > 0) {
+            unset($_SESSION['makingappointments_tb']);
             $_SESSION['makingappointments_tb'] = $query;
             Response::success();
         } else {
