@@ -26,23 +26,6 @@ class MakingAppointmentsController
     /**
      * @return void
      */
-    public function dateAddDays(): void
-    {
-        $dateThai = new DateThai();
-        $arrayDateAdd = [
-            'day1' => $dateThai->addDate('+ 1 days')->getdayAdd(),
-            'day2' => $dateThai->addDate('+ 2 days')->getdayAdd(),
-            'day3' => $dateThai->addDate('+ 3 days')->getdayAdd(),
-            'day4' => $dateThai->addDate('+ 4 days')->getdayAdd(),
-            'day5' => $dateThai->addDate('+ 5 days')->getdayAdd(),
-            'day6' => $dateThai->addDate('+ 6 days')->getdayAdd()
-        ];
-
-        $_SESSION['days'] = $arrayDateAdd;
-
-        Response::render($arrayDateAdd)->jsonString(); 
-    }
-
     public function countTotalUsersAppointments(): void
     {
 

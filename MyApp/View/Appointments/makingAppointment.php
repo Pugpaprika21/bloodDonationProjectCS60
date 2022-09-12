@@ -1,4 +1,24 @@
-<?php session_start(); ?>
+<?php
+
+session_start();
+
+use MyApp\Helper\Date\DateThai;
+
+require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
+
+$dateThai = new DateThai();
+
+$arrayDateAdd = [
+    'day1' => $dateThai->addDate('+ 1 days')->getdayAdd(),
+    'day2' => $dateThai->addDate('+ 2 days')->getdayAdd(),
+    'day3' => $dateThai->addDate('+ 3 days')->getdayAdd(),
+    'day4' => $dateThai->addDate('+ 4 days')->getdayAdd(),
+    'day5' => $dateThai->addDate('+ 5 days')->getdayAdd(),
+    'day6' => $dateThai->addDate('+ 6 days')->getdayAdd()
+];
+
+?>
+
 <?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Layout/header.php'); ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/navbar.php'); ?>
@@ -46,10 +66,12 @@
 
                 <div class="row g-3">
                     <div class="col-sm-4">
-        
+
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d1">
-                                วันที่ :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day1'])->dayMonthYearCut(); ?> 
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -57,13 +79,15 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal1.php'); ?>
                             </div>
                         </div>
-        
+
                     </div>
                     <div class="col-sm-4">
-        
+
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d2">
-                                วันที่ :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day2'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -71,13 +95,15 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal2.php'); ?>
                             </div>
                         </div>
-        
+
                     </div>
                     <div class="col-sm-4">
-        
+
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d3">
-                                วันที่ :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day3'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -85,14 +111,16 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal3.php'); ?>
                             </div>
                         </div>
-        
+
                     </div>
 
                     <div class="col-sm-4">
-        
+
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d4">
-                                วันที่ :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day4'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -100,13 +128,15 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal4.php'); ?>
                             </div>
                         </div>
-        
+
                     </div>
                     <div class="col-sm-4">
-        
+
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d5">
-                                วันที่ :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day5'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -114,13 +144,15 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal5.php'); ?>
                             </div>
                         </div>
-        
+
                     </div>
                     <div class="col-sm-4">
-        
+
                         <div class="card card-bookingTime shadow-sm rounded">
                             <div class="card-header card-header-showDateThai" id="d6">
-                                วันที่ :
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day6'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title">Special title treatment</h5>
@@ -128,7 +160,7 @@
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal6.php'); ?>
                             </div>
                         </div>
-        
+
                     </div>
                 </div>
 
@@ -156,47 +188,29 @@
             });
         }
 
-        (function() {
-            $.ajax({
-                type: "GET",
-                dataType: "json",
-                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_dateAddDays.php",
-                success: function(response) {
-
-                    console.log(response);
-
-                    let iconDate = `
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clock-fill mb-1" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
-                        </svg>
-                    `;
-
-                    $('#d1').html(iconDate + ' ' + dateThai(response.day1));
-                    $('#d2').html(iconDate + ' ' + dateThai(response.day2));
-                    $('#d3').html(iconDate + ' ' + dateThai(response.day3));
-                    $('#d4').html(iconDate + ' ' + dateThai(response.day4));
-                    $('#d5').html(iconDate + ' ' + dateThai(response.day5));
-                    $('#d6').html(iconDate + ' ' + dateThai(response.day6));
-                }
-            });
-        })();
-
         var postURL = '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_getAppointmentsData.php';
 
         $('#submit-modal1').submit(function(e) {
             e.preventDefault();
-            const Fd = new FormData($(this)[0]);
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: postURL,
-                data: Fd,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    console.log(response);
-                }
-            });
+            if ($('#durationApp').val() !== 'notSelect') {
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: postURL,
+                    data: {
+                        dateApp: $('#dateApp').val(),
+                        durationApp: $('#durationApp').val(),
+                        durationStatus: $('#durationStatus').val(),
+                        user_id: $('#user_id').val()
+                    },
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+
+            } else {
+
+            }
         });
 
         $('#submit-modal2').submit(function(e) {
@@ -224,16 +238,8 @@
             console.log('hahaha 6');
         });
 
-        function dateThai(strDate) {
-            const date = new Date(strDate);
-            const result = date.toLocaleDateString('th-TH', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                weekday: 'long',
-            });
+        function swalMessage() {
 
-            return result;
         }
     });
 </script>
