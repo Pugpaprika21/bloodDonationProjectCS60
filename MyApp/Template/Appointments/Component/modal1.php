@@ -14,8 +14,8 @@
                     <input type="hidden" name="dateApp" id="dateApp" value="<?= $arrayDateAdd['day1']; ?>">
                     <select class="form-select" id="durationApp" name="durationApp">
                         <option disabled>---- เลือกช่วงเวลาการนัดหมาย ----</option>
-                        <option value="morning">ช่วงเช้า : 8.30 ถึง 11.30 น.</option>
-                        <option value="afternoon">ช่วงบ่าย : 13.00 ถึง 16.30 น.</option>
+                        <option value="ช่วงเช้า">ช่วงเช้า : 8.30 ถึง 11.30 น.</option>
+                        <option value="ช่วงบ่าย">ช่วงบ่าย : 13.00 ถึง 16.30 น.</option>
                     </select> 
                     <input type="hidden" name="durationStatus" id="durationStatus" value="0">
                     <input type="hidden" name="user_id" id="user_id" value="<?= $_SESSION['user_id']; ?>">

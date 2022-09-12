@@ -9,6 +9,7 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 $dateThai = new DateThai();
 
 $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['makingappointments_tb'] : [];
+$formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [];
 
 ?>
 <?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
@@ -36,6 +37,12 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
         padding-top: 20px;
         padding-bottom: 20px;
     }
+
+    #formBloodData_info,
+    #formBloodData_paginate {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
 </style>
 
 <div class="container">
@@ -54,7 +61,7 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
                     <button class="nav-link" id="pills-bloodDonationForm-tab" data-bs-toggle="pill" data-bs-target="#pills-bloodDonationForm" type="button" role="tab" aria-controls="pills-bloodDonationForm" aria-selected="false">แบบฟอร์ม</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-appointments-tab" data-bs-toggle="pill" data-bs-target="#pills-appointments" type="button" role="tab" aria-controls="pills-appointments" aria-selected="false">ข้อมูลการนัดหมาย</button>
+                    <button class="nav-link" id="pills-appointments-tab" data-bs-toggle="pill" data-bs-target="#pills-appointments" type="button" role="tab" aria-controls="pills-appointments" aria-selected="false">ข้อมูลทั้งหมด</button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
@@ -71,13 +78,7 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
                             <button class="nav-link active" id="appointmentsShowData-tab" data-bs-toggle="tab" data-bs-target="#appointmentsShowData-tab-pane" type="button" role="tab" aria-controls="appointmentsShowData-tab-pane" aria-selected="true">ข้อมูลการนัดหมาย</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Profile</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="disabled-tab" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled>Disabled</button>
+                            <button class="nav-link" id="formBloodData-tab" data-bs-toggle="tab" data-bs-target="#formBloodData-tab-pane" type="button" role="tab" aria-controls="formBloodData-tab-pane" aria-selected="false">เเบบฟอร์มบริจาคโลหิต</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -94,25 +95,59 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = 0; foreach ($makingappointments_tb as $key => $values) : ?>
+                                    <?php $i = 0;
+                                    foreach ($makingappointments_tb as $key => $values) : ?>
                                         <tr>
                                             <td><?= ($i + 1); ?></td>
                                             <td><?= $dateThai->get($values->dateApp)->dayMonthYearCut(); ?></td>
                                             <td><?= $values->durationApp; ?></td>
                                             <td><?= $values->durationTime; ?></td>
                                             <?php if ($values->durationStatus == 0) : ?>
-                                                <td><button type="button" class="btn btn-warning btn-sm text-dark">ยังไม่นัดหมาย</button></td>
+                                                <td><span class="badge text-bg-warning">ยังไม่นัดหมาย</span></td>
                                             <?php elseif ($values->durationStatus == 1) : ?>
-                                                <td><button type="button" class="btn btn-success btn-sm text-white">นัดหมายสำเร็จ</button></td>
+                                                <td><span class="badge text-bg-success">นัดหมายสำเร็จ</span></td>
                                             <?php endif; ?>
                                         </tr>
-                                    <?php $i++; endforeach; ?>
+                                    <?php $i++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
+                        <!-- ข้อมูลเเบบฟอร์มบริจาคโลหิต -->
+                        <div class="tab-pane fade" id="formBloodData-tab-pane" role="tabpanel" aria-labelledby="formBloodData-tab" tabindex="0">
+                            <table class="table table-bordered text-center display" id="formBloodData" style="width:100%">
+                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
+                                    <tr>
+                                        <td>#</td>
+                                        <td>คำถามที่ 1</td>
+                                        <td>คำถามที่ 2</td>
+                                        <td>คำถามที่ 3</td>
+                                        <td>คำถามที่ 4</td>
+                                        <td>คำถามที่ 5</td>
+                                        <td>คำถามที่ 6</td>
+                                        <td>สถานะ</td>
+                                        <td>รายละเอียด</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($formblood_tb  as $key => $values) : ?>
+                                        <tr>
+                                            <td><?= $values->form_id; ?></td>
+                                            <td><?= $values->healthCategoryQ1; ?></td>
+                                            <td><?= $values->healthCategoryQ2; ?></td>
+                                            <td><?= $values->healthCategoryQ3; ?></td>
+                                            <td><?= $values->healthCategoryQ4; ?></td>
+                                            <td><?= $values->healthCategoryQ5; ?></td>
+                                            <td><?= $values->healthCategoryQ6; ?></td>
+                                            <?php if ($values->formStatus == 1) : ?>
+                                                <td><span class="badge text-bg-success">ทำเเบบสอบถามเเล้ว</span></td>
+                                            <?php endif; ?> 
+                                            <td><a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/userViewFormBlood.php?form_id=<?= $values->form_id; ?>" role="button">เรียกดู</a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,13 +172,32 @@ $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['
                 success: function(response) {
                     if (response.status == 200) {
                         fnDataTable('#appointmentsShowData');
+                        fnDataTable('#formBloodData');
+                    }
+                }
+            });
+        })();
+
+        (function() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBlood.php",
+                data: {
+                    user_id: <?= $_SESSION['user_id']; ?>
+                },
+                success: function(response) {
+                    if (response.status == 200) {
+                        fnDataTable('#formBloodData');
                     }
                 }
             });
         })();
 
         function fnDataTable(tbID) {
-            return $(tbID).DataTable();
+            setInterval(() => {
+                return $(tbID).DataTable();
+            }, 1000);
         }
     });
 </script>

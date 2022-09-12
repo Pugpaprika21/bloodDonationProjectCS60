@@ -372,8 +372,6 @@
     </form>
 </div>
 
-<!-- bloodDonationForm.php -->
-
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
 
 <script>

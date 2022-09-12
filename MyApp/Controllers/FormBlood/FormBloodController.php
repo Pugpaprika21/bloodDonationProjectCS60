@@ -2,6 +2,8 @@
 
 namespace MyApp\Controllers\FormBlood;
 
+session_start();
+
 use MyApp\Helper\Date\DateThai;
 use MyApp\Helper\Tool\StringDifferent;
 use MyApp\Http\HttpResponse\Response;
@@ -43,4 +45,46 @@ class FormBloodController
             }
         }
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function showDataFormBlood(object $request): void
+    {
+        $sql = "SELECT * FROM formblood_tb WHERE user_id =:user_id";
+        $query = (new Query())->select($sql, [
+            'user_id' => $request->user_id
+        ]);
+
+        if (count($query) > 0) {
+            $_SESSION['formblood_tb'] = $query;
+            Response::success();
+        } else {
+            $_SESSION['formblood_tb'] = [];
+            Response::error();
+        }
+    }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function showDataFormBloodByID(object $request): void
+    {
+        $sql = "SELECT * FROM formblood_tb WHERE form_id =:form_id";
+        $query = (new Query())->select($sql, [
+            'form_id' => $request->form_id
+        ]);
+
+        if (count($query) > 0) {
+            unset($_SESSION['formblood_tb_all']);
+            $_SESSION['formblood_tb_all'] = $query;
+            Response::success();
+        } else {
+            $_SESSION['formblood_tb_all'] = [];
+            Response::error();
+        }
+    }
 }
+
+
+
