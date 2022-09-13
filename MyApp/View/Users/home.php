@@ -21,7 +21,6 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
     .card-main {
         margin-top: 30px;
     }
-
     /* dt */
     .dataTables_length {
         padding-top: 20px;
@@ -41,6 +40,12 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
 
     #formBloodData_info,
     #formBloodData_paginate {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    #basicinformation_tb_info,
+    #basicinformation_tb_paginate {
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -82,7 +87,7 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                                     <tr>
                                         <td>#</td>
                                         <td>ชื่อศูนย์บริการโลหิต</td>
-                                        <td>ที่ตั้งศูนย์บริการโลหิต</td>
+                                        <td>ที่ตั้ง</td>
                                         <td>เปิด / ปิด</td>
                                         <td>จังหวัด</td>
                                         <td>เขต</td> 	
@@ -100,7 +105,7 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                                             <td><?= $values->provinceSc; ?></td> 
                                             <td><?= $values->districtSc; ?></td>
                                             <td><?= $values->phoneNumberSc; ?></td>
-                                            <td><a class="btn btn-primary btn-sm" href="#" role="button">เพิ่มเติม</a></td>
+                                            <td><a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/userViewBasicInformation.php?bc_id=<?= $values->bc_id; ?>" role="button">เพิ่มเติม</a></td>
                                         </tr>
                                     <?php $i++; endforeach; ?>
                                 </tbody>
@@ -215,9 +220,7 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                     user_id: <?= $_SESSION['user_id']; ?>
                 },
                 success: function(response) {
-                    console.log(response);
                     if (response.status == 200) {
-                        
                         fnDataTable('#basicinformation_tb');
                     }
                 }
@@ -256,12 +259,13 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
             });
         })();
 
-
-
         function fnDataTable(tbID) {
-            setInterval(() => {
-                return $(tbID).DataTable();
-            }, 1000);
+            return $(tbID).DataTable();
         }
     });
+
+    function createDataTable() {
+        
+    }
+
 </script>

@@ -17,13 +17,12 @@ class BasicInformationController
      */
     public function showDataBasicInfo(object $request): void
     {
-        $user_id = (int)$request->user_id;
         $sql = "SELECT * FROM basicinformation_tb";
         $query = (new Query())->select($sql);
-
+        
         if (count($query) > 0) {
             $_SESSION['basicinformation_tb'] = $query;
-            Response::render($query)->jsonString();
+            Response::success();
         } else {
             $_SESSION['basicinformation_tb'] = [];
             Response::error();
