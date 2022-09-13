@@ -20,9 +20,8 @@ class MakingAppointmentsController
     public function getAppointmentsData(object $request): void
     {
         $str = new StringDifferent();
-
         $sql = "SELECT * FROM makingappointments_tb WHERE user_id =:user_id";
-
+        
         $query = (new Query())->select($sql, [
             'user_id' => $str->clean($request->user_id)
         ]);
@@ -33,6 +32,7 @@ class MakingAppointmentsController
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('นัดหมายบริจาคโลหิตได้อีกภายในที่ ' . $dayMonthYearTomorrow);
+
         } else {
 
             $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
@@ -90,28 +90,37 @@ class MakingAppointmentsController
         $user_id = (int)$request->user_id;
         $dateThai = new DateThai();
 
-        $day1 = $this->setDateAdd($dateThai->addDate('+ 1 days')->getdayAdd(), $user_id);
-        $day2 = $this->setDateAdd($dateThai->addDate('+ 2 days')->getdayAdd(), $user_id);
-        $day3 = $this->setDateAdd($dateThai->addDate('+ 3 days')->getdayAdd(), $user_id);
-        $day4 = $this->setDateAdd($dateThai->addDate('+ 4 days')->getdayAdd(), $user_id);
-        $day5 = $this->setDateAdd($dateThai->addDate('+ 5 days')->getdayAdd(), $user_id);
-        $day6 = $this->setDateAdd($dateThai->addDate('+ 6 days')->getdayAdd(), $user_id);
+        if ($user_id !== 0) {
+            $stackDate['d1'] = $this->setDateAdd($dateThai->addDate('+ 1 days')->getdayAdd());
+            $stackDate['d2'] = $this->setDateAdd($dateThai->addDate('+ 2 days')->getdayAdd());
+            $stackDate['d3'] = $this->setDateAdd($dateThai->addDate('+ 3 days')->getdayAdd());
+            $stackDate['d4'] = $this->setDateAdd($dateThai->addDate('+ 4 days')->getdayAdd());
+            $stackDate['d5'] = $this->setDateAdd($dateThai->addDate('+ 5 days')->getdayAdd());
+            $stackDate['d6'] = $this->setDateAdd($dateThai->addDate('+ 6 days')->getdayAdd());
 
-        Response::render($day1)->jsonString();
+            Response::render($stackDate)->jsonString();
+        } else {
+            Response::error();
+        }
     }
     /**
      * @param string $dateAdd
-     * @param integer $user_id
-     * @return array
+     * @return int
      */
-    private function setDateAdd(string $dateAdd, int $user_id): array
+    private function setDateAdd(string $dateAdd): int
     {
-        $sql = "SELECT COUNT(dateApp) FROM makingappointments_tb WHERE dateApp =:dateApp AND user_id =:user_id";
+        $countResult = 0;
+        $sql = "SELECT dateApp FROM makingappointments_tb WHERE dateApp =:dateApp";
         $query = (new Query())->select($sql, [
             'dateApp' => $dateAdd,
-            'user_id' => $user_id
         ]);
 
-        return $query[0];
+        if (count($query) > 0) {
+            $countResult = count($query);
+        } else {
+            $countResult = 0;
+        }
+
+        return $countResult;
     }
 }

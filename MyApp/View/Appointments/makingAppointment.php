@@ -74,7 +74,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day1'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
+                                <h5 class="card-title" id="card-title-d1"></h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal1.php'); ?>
                             </div>
@@ -90,7 +90,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day2'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
+                                <h5 class="card-title" id="card-title-d2"></h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal2.php'); ?>
                             </div>
@@ -106,7 +106,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day3'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
+                                <h5 class="card-title" id="card-title-d3"></h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal3.php'); ?>
                             </div>
@@ -123,7 +123,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day4'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
+                                <h5 class="card-title" id="card-title-d4"></h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal4.php'); ?>
                             </div>
@@ -139,7 +139,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day5'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
+                                <h5 class="card-title" id="card-title-d5"></h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal5.php'); ?>
                             </div>
@@ -155,7 +155,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day6'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
+                                <h5 class="card-title" id="card-title-d6"></h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal6.php'); ?>
                             </div>
@@ -203,6 +203,27 @@ $arrayDateAdd = [
             e.preventDefault();
             sendData(this, 6);
         });
+
+        function getCountDay() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_countAsDateApp.php",
+                data: {
+                    user_id: <?= $_SESSION['user_id']; ?>
+                },
+                success: function(response) {
+                    $('#card-title-d1').html(`จำนวนผู้นัดหมาย : ${response.d1} คน`);
+                    $('#card-title-d2').html(`จำนวนผู้นัดหมาย : ${response.d2} คน`);
+                    $('#card-title-d3').html(`จำนวนผู้นัดหมาย : ${response.d3} คน`);
+                    $('#card-title-d4').html(`จำนวนผู้นัดหมาย : ${response.d4} คน`);
+                    $('#card-title-d5').html(`จำนวนผู้นัดหมาย : ${response.d5} คน`);
+                    $('#card-title-d6').html(`จำนวนผู้นัดหมาย : ${response.d6} คน`);
+                }
+            });
+        }
+
+        getCountDay();
 
         var postURL = '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_getAppointmentsData.php';
 
