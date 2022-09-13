@@ -17,25 +17,6 @@ class MakingAppointmentsController
      * @param object $request
      * @return void
      */
-    public function createTimeThai(object $request): void
-    {
-        $dateThai = new DateThai();
-        $dateReq = $request->dateAppointments;
-        $dateResult = ['date' => $dateThai->get($dateReq)->dayMonthYearCut()];
-        Response::render($dateResult)->jsonString();
-    }
-    /**
-     * @return void
-     */
-    public function countTotalUsersAppointments(): void
-    {
-        $count = 0;
-        $sql = "SELECT COUNT(durationApp) FROM makingappointments_tb WHERE user_id =:user_id";
-    }
-    /**
-     * @param object $request
-     * @return void
-     */
     public function getAppointmentsData(object $request): void
     {
         $str = new StringDifferent();
@@ -68,20 +49,6 @@ class MakingAppointmentsController
                 Response::success();
             }
         }
-
-        $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
-
-        $query = (new Query())->insert($sql, [
-            'dateApp' => $str->clean($request->dateApp),
-            'durationApp' => $str->clean($request->durationApp),
-            'durationTime' => $str->clean($request->durationTime),
-            'durationStatus' => $str->clean($request->durationStatus),
-            'user_id' => $str->clean($request->user_id)
-        ]);
-
-        if ($query) {
-            Response::success();
-        }
     }
     /**
      * @param object $request
@@ -112,5 +79,39 @@ class MakingAppointmentsController
             $_SESSION['makingappointments_tb'] = [];
             Response::error('no data in db');
         }
+    }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function countAsDateApp(object $request): void
+    {
+        $stackDate = [];
+        $user_id = (int)$request->user_id;
+        $dateThai = new DateThai();
+
+        $day1 = $this->setDateAdd($dateThai->addDate('+ 1 days')->getdayAdd(), $user_id);
+        $day2 = $this->setDateAdd($dateThai->addDate('+ 2 days')->getdayAdd(), $user_id);
+        $day3 = $this->setDateAdd($dateThai->addDate('+ 3 days')->getdayAdd(), $user_id);
+        $day4 = $this->setDateAdd($dateThai->addDate('+ 4 days')->getdayAdd(), $user_id);
+        $day5 = $this->setDateAdd($dateThai->addDate('+ 5 days')->getdayAdd(), $user_id);
+        $day6 = $this->setDateAdd($dateThai->addDate('+ 6 days')->getdayAdd(), $user_id);
+
+        Response::render($day1)->jsonString();
+    }
+    /**
+     * @param string $dateAdd
+     * @param integer $user_id
+     * @return array
+     */
+    private function setDateAdd(string $dateAdd, int $user_id): array
+    {
+        $sql = "SELECT COUNT(dateApp) FROM makingappointments_tb WHERE dateApp =:dateApp AND user_id =:user_id";
+        $query = (new Query())->select($sql, [
+            'dateApp' => $dateAdd,
+            'user_id' => $user_id
+        ]);
+
+        return $query[0];
     }
 }

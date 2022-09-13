@@ -30,24 +30,24 @@ $arrayDateAdd = [
 
     .card-main {
         width: 70rem;
-        border-color: #FF6767;
+        border-color: #3A5063;
     }
 
     .card-main-header {
         padding-top: 20px;
         padding-bottom: 20px;
         color: #FFFFFF;
-        background-color: #FF6767;
+        background-color: #3A5063;
         font-size: 18px;
     }
 
     .card-bookingTime {
-        border-color: #455467;
+        border-color: #2C74B4;
     }
 
     .card-header-showDateThai {
         color: #FFFFFF;
-        background-color: #455467;
+        background-color: #2C74B4;
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -74,7 +74,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day1'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal1.php'); ?>
                             </div>
@@ -90,7 +90,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day2'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal2.php'); ?>
                             </div>
@@ -106,7 +106,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day3'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal3.php'); ?>
                             </div>
@@ -123,7 +123,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day4'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal4.php'); ?>
                             </div>
@@ -139,7 +139,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day5'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal5.php'); ?>
                             </div>
@@ -155,7 +155,7 @@ $arrayDateAdd = [
                                 </svg> วันที่ : <?= $dateThai->get($arrayDateAdd['day6'])->dayMonthYearCut(); ?>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Special title treatment</h5>
+                                <h5 class="card-title">จำนวนผู้นัดหมาย : </h5>
                                 <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal6.php'); ?>
                             </div>
@@ -174,56 +174,46 @@ $arrayDateAdd = [
 <script>
     $(document).ready(function() {
 
-        function setTimeBooking() {
-            $.ajax({
-                type: "POST",
-                dataType: "json",
-                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_createTimeThai.php",
-                data: "data",
-                success: function(response) {
-                    console.log(response);
-                }
-            });
-        }
-
-        var postURL = '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_getAppointmentsData.php';
-
         $('#submit-modal1').submit(function(e) {
             e.preventDefault();
-            sendData(this);
+            sendData(this, 1);
         });
 
         $('#submit-modal2').submit(function(e) {
             e.preventDefault();
-            sendData(this);
+            sendData(this, 2);
         });
 
         $('#submit-modal3').submit(function(e) {
             e.preventDefault();
-            sendData(this);
+            sendData(this, 3);
         });
 
         $('#submit-modal4').submit(function(e) {
             e.preventDefault();
-            sendData(this);
+            sendData(this, 4);
         });
 
         $('#submit-modal5').submit(function(e) {
             e.preventDefault();
-            sendData(this);
+            sendData(this, 5);
         });
 
         $('#submit-modal6').submit(function(e) {
-            sendData(this);
+            e.preventDefault();
+            sendData(this, 6);
         });
 
-        function sendData(_this) {
+        var postURL = '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_getAppointmentsData.php';
+
+        function sendData(_this, eId) {
+            let id = eId;
             const Fd = new FormData($(_this)[0]);
-            Fd.append('dateApp', $('#dateApp').val());
-            Fd.append('durationApp', $('#durationApp').val());
-            Fd.append('durationTime', ($('#durationApp').val() == 'morning') ? '8.30 ถึง 11.30 น.' : '13.00 ถึง 16.30 น.');
-            Fd.append('durationStatus', $('#durationStatus').val());
-            Fd.append('user_id', $('#user_id').val());
+            Fd.append('dateApp', $(`#dateApp${id}`).val());
+            Fd.append('durationApp', $(`#durationApp${id}`).val());
+            Fd.append('durationTime', ($(`#durationApp${id}`).val() == 'ช่วงเช้า') ? '8.30 ถึง 11.30 น.' : '13.00 ถึง 16.30 น.');
+            Fd.append('durationStatus', $(`#durationStatus${id}`).val());
+            Fd.append('user_id', $(`#user_id${id}`).val());
 
             if (Fd.get('durationApp') !== null) {
                 $.ajax({
@@ -234,16 +224,12 @@ $arrayDateAdd = [
                     contentType: false,
                     processData: false,
                     success: function(response) {
-
                         let status = response.status;
                         let massage = response.massage;
-
-                        console.log(response);
+                        let url = `../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php?massage=${massage}`;
 
                         if (status == 200) {
-                            window.location.reload();
-                            // let url = `../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php?massage=${massage}`;
-                            // swalMessage(_this, 'สำเร็จ', 'บันทึกข้อมูลสำเร็จ', 'success', url);
+                            swalMessage(_this, 'สำเร็จ', 'บันทึกข้อมูลสำเร็จ', 'success', url);
 
                         } else {
                             swalMessage(_this, 'ผิดพลาด', massage, 'error');
@@ -257,9 +243,8 @@ $arrayDateAdd = [
         }
 
         function swalMessage(_this = {}, title, message, icon, url = '') {
-
             if (url !== '') {
-                //window.location.href = url;
+                window.location.href = url;
             } else {
                 Swal.fire(
                     title,
@@ -267,6 +252,7 @@ $arrayDateAdd = [
                     icon
                 ).then((result) => {
                     $(_this)[0].reset();
+                    $(_this).modal('hide');
                 });
             }
         }
