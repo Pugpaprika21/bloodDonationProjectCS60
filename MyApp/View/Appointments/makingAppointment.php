@@ -51,6 +51,11 @@ $arrayDateAdd = [
         padding-top: 20px;
         padding-bottom: 20px;
     }
+
+    .modal-header {
+        color: #FFFFFF;
+        background-color: #2C74B4;
+    }
 </style>
 
 <div class="container">
@@ -75,7 +80,7 @@ $arrayDateAdd = [
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="card-title-d1"></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">กรุณาเลือกวันเวลาที่ต้องการนัดหมายบริจาคโลหิต</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal1.php'); ?>
                             </div>
                         </div>
@@ -91,7 +96,7 @@ $arrayDateAdd = [
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="card-title-d2"></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">กรุณาเลือกวันเวลาที่ต้องการนัดหมายบริจาคโลหิต</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal2.php'); ?>
                             </div>
                         </div>
@@ -107,7 +112,7 @@ $arrayDateAdd = [
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="card-title-d3"></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">กรุณาเลือกวันเวลาที่ต้องการนัดหมายบริจาคโลหิต</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal3.php'); ?>
                             </div>
                         </div>
@@ -124,7 +129,7 @@ $arrayDateAdd = [
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="card-title-d4"></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">กรุณาเลือกวันเวลาที่ต้องการนัดหมายบริจาคโลหิต</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal4.php'); ?>
                             </div>
                         </div>
@@ -140,7 +145,7 @@ $arrayDateAdd = [
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="card-title-d5"></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">กรุณาเลือกวันเวลาที่ต้องการนัดหมายบริจาคโลหิต</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal5.php'); ?>
                             </div>
                         </div>
@@ -156,7 +161,7 @@ $arrayDateAdd = [
                             </div>
                             <div class="card-body">
                                 <h5 class="card-title" id="card-title-d6"></h5>
-                                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                <p class="card-text">กรุณาเลือกวันเวลาที่ต้องการนัดหมายบริจาคโลหิต</p>
                                 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Appointments/Component/modal6.php'); ?>
                             </div>
                         </div>

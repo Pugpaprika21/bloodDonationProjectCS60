@@ -8,6 +8,7 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 
 $dateThai = new DateThai();
 
+$basicinformation_tb = isset($_SESSION['basicinformation_tb']) ? $_SESSION['basicinformation_tb'] : [] ;
 $makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['makingappointments_tb'] : [];
 $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [];
 
@@ -52,10 +53,7 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
 
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+                    <button class="nav-link active" id="pills-basic-information-tab" data-bs-toggle="pill" data-bs-target="#pills-basic-information" type="button" role="tab" aria-controls="pills-basic-information" aria-selected="false">ข้อมูลพื้นฐานต่าง ๆ</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-bloodDonationForm-tab" data-bs-toggle="pill" data-bs-target="#pills-bloodDonationForm" type="button" role="tab" aria-controls="pills-bloodDonationForm" aria-selected="false">แบบฟอร์ม</button>
@@ -65,8 +63,55 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">...</div>
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">...</div>
+                <!-- ข้อมูลพื้นฐานต่าง ๆ -->
+                <div class="tab-pane fade show active" id="pills-basic-information" role="tabpanel" aria-labelledby="pills-basic-information-tab" tabindex="0">
+                    <!-- ข้อมูลพื้นฐานต่าง ๆ -->
+                    <nav>
+                        <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-blood-center-tab" data-bs-toggle="tab" data-bs-target="#nav-blood-center" type="button" role="tab" aria-controls="nav-blood-center" aria-selected="true">ศูนย์บริการโลหิต</button>
+                            <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</button>
+                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
+                            <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <!-- ศูนย์บริการโลหิต -->
+                        <div class="tab-pane fade show active" id="nav-blood-center" role="tabpanel" aria-labelledby="nav-blood-center-tab" tabindex="0">
+                            <table class="table table-bordered text-center display" id="basicinformation_tb" style="width:100%">
+                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
+                                    <tr>
+                                        <td>#</td>
+                                        <td>ชื่อศูนย์บริการโลหิต</td>
+                                        <td>ที่ตั้งศูนย์บริการโลหิต</td>
+                                        <td>เปิด / ปิด</td>
+                                        <td>จังหวัด</td>
+                                        <td>เขต</td> 	
+                                        <td>ติดต่อ</td> 
+                                        <td>รายละเอียด</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php $i = 0; foreach ($basicinformation_tb as $key => $values) : ?>
+                                        <tr>
+                                            <td><?= ($i + 1); ?></td>
+                                            <td><?= $values->nameSc; ?></td>
+                                            <td><?= $values->addressSc; ?></td>
+                                            <td><?= $values->officeHoursSc; ?></td>
+                                            <td><?= $values->provinceSc; ?></td> 
+                                            <td><?= $values->districtSc; ?></td>
+                                            <td><?= $values->phoneNumberSc; ?></td>
+                                            <td><a class="btn btn-primary btn-sm" href="#" role="button">เพิ่มเติม</a></td>
+                                        </tr>
+                                    <?php $i++; endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
+                        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
+                    </div>
+                    <!--  -->
+                </div>
                 <!-- แบบฟอร์มบริจาคโลหิต -->
                 <div class="tab-pane fade" id="pills-bloodDonationForm" role="tabpanel" aria-labelledby="pills-bloodDonationForm-tab" tabindex="0">
                     <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/bloodDonationForm.php'); ?>
@@ -95,7 +140,8 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i = 0; foreach ($makingappointments_tb as $key => $values) : ?>
+                                    <?php $i = 0;
+                                    foreach ($makingappointments_tb as $key => $values) : ?>
                                         <tr>
                                             <td><?= ($i + 1); ?></td>
                                             <td><?= $dateThai->get($values->dateApp)->dayMonthYearCut(); ?></td>
@@ -107,7 +153,8 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                                                 <td><span class="badge text-bg-success">นัดหมายสำเร็จ</span></td>
                                             <?php endif; ?>
                                         </tr>
-                                    <?php $i++; endforeach; ?>
+                                    <?php $i++;
+                                    endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -139,7 +186,7 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                                             <td><?= $values->healthCategoryQ6; ?></td>
                                             <?php if ($values->formStatus == 1) : ?>
                                                 <td><span class="badge text-bg-success">ทำเเบบสอบถามเเล้ว</span></td>
-                                            <?php endif; ?> 
+                                            <?php endif; ?>
                                             <td><a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/userViewFormBlood.php?form_id=<?= $values->form_id; ?>" role="button">เรียกดู</a></td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -158,6 +205,24 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
 
 <script>
     $(document).ready(function() {
+
+        (function() {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_showDataBasicInfo.php",
+                data: {
+                    user_id: <?= $_SESSION['user_id']; ?>
+                },
+                success: function(response) {
+                    console.log(response);
+                    if (response.status == 200) {
+                        
+                        fnDataTable('#basicinformation_tb');
+                    }
+                }
+            });
+        })();
 
         (function() {
             $.ajax({
@@ -190,6 +255,8 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                 }
             });
         })();
+
+
 
         function fnDataTable(tbID) {
             setInterval(() => {

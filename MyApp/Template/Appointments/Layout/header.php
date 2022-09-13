@@ -12,6 +12,7 @@
     <style>
         body {
             font-family: 'Mitr', sans-serif;
+            background-color: #FFFAEB;
         }
 
         /* .container {
