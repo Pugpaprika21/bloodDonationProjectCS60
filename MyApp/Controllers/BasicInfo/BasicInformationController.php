@@ -4,6 +4,7 @@ namespace MyApp\Controllers\BasicInfo;
 
 session_start();
 
+use MyApp\Helper\Tool\StringDifferent;
 use MyApp\Http\HttpResponse\Response;
 use MyApp\QueryBuilder\AppQuery\Query;
 
@@ -19,12 +20,31 @@ class BasicInformationController
     {
         $sql = "SELECT * FROM basicinformation_tb";
         $query = (new Query())->select($sql);
-        
+
         if (count($query) > 0) {
             $_SESSION['basicinformation_tb'] = $query;
             Response::success();
         } else {
             $_SESSION['basicinformation_tb'] = [];
+            Response::error();
+        }
+    }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function showDataBasicInfoByID(object $request): void
+    {
+        $strClean = new StringDifferent();
+
+        $sql = "SELECT * FROM basicinformation_tb WHERE bc_id =:bc_id";
+        $query = (new Query())->select($sql, [
+            'bc_id' => $strClean->clean($request->bc_id)
+        ]);
+
+        if (count($query) > 0) {
+            Response::render($query)->jsonString();
+        } else {    
             Response::error();
         }
     }
