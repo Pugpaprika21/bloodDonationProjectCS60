@@ -255,27 +255,34 @@ $arrayDateAdd = [
                         let url = `../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php?massage=${massage}`;
 
                         if (status == 200) {
-                            swalMessage(_this, 'สำเร็จ', 'บันทึกข้อมูลสำเร็จ', 'success', url);
+                            Swal.fire(
+                                'สำเร็จ',
+                                'บันทึกข้อมูลสำเร็จ',
+                                'success'
+                            ).then((result) => {
+                                window.location.href = url;
+                            });
 
                         } else {
-                            swalMessage(_this, 'ผิดพลาด', massage, 'error');
+
+                            Swal.fire(
+                                'ผิดพลาด',
+                                massage,
+                                'error'
+                            ).then((result) => {
+                                $(_this)[0].reset();
+                                $(_this).modal('hide');
+                            });
                         }
                     }
                 });
 
             } else {
-                swalMessage(_this, 'คำเตือน', 'กรุณาเลือกช่วงเวลานัดหมาย', 'warning');
-            }
-        }
 
-        function swalMessage(_this = {}, title, message, icon, url = '') {
-            if (url !== '') {
-                window.location.href = url;
-            } else {
                 Swal.fire(
-                    title,
-                    message,
-                    icon
+                    'คำเตือน',
+                    'กรุณาเลือกช่วงเวลานัดหมาย',
+                    'warning'
                 ).then((result) => {
                     $(_this)[0].reset();
                     $(_this).modal('hide');

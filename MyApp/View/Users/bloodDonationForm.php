@@ -413,6 +413,8 @@
                                     window.location.href = urlBooking;
                                 });
 
+                                console.log(response);
+
                             } else {
                                 Swal.fire(
                                     'ไม่สำเร็จ',

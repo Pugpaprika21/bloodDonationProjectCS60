@@ -21,8 +21,8 @@
                     <input type="hidden" name="user_id" id="user_id4" value="<?= $_SESSION['user_id']; ?>">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+                    <button type="submit" class="btn btn-primary">บันทึก</button>
                 </div>
             </div>
         </form>

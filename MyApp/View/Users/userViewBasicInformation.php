@@ -69,14 +69,10 @@
                 bc_id: getUrl
             },
             success: function(response) {
-                console.log(response);
-
                 let html = ``;
                 let num = 0;
 
                 response.forEach(function (data) {
-                    console.log(data);
-
                     html += `
                         <tr>
                             <td>${(num + 1)}</td>

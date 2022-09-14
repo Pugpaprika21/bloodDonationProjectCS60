@@ -20,18 +20,19 @@ class MakingAppointmentsController
     public function getAppointmentsData(object $request): void
     {
         $str = new StringDifferent();
-        $sql = "SELECT * FROM makingappointments_tb WHERE user_id =:user_id";
+        $sql = "SELECT * FROM makingappointments_tb WHERE user_id =:user_id AND dateApp =:dateApp";
         
         $query = (new Query())->select($sql, [
-            'user_id' => $str->clean($request->user_id)
+            'user_id' => $str->clean($request->user_id),
+            'dateApp' => $str->clean($request->dateApp),
         ]);
 
         if (isset($query[0]->dateApp) == $request->dateApp) {
 
-            $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . '+3 days'));
+            $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . '+2 days'));
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
-            Response::error('นัดหมายบริจาคโลหิตได้อีกภายในที่ ' . $dayMonthYearTomorrow);
+            Response::error('นัดหมายบริจาคโลหิตได้อีกภายในวันที่ ' . $dayMonthYearTomorrow);
 
         } else {
 
