@@ -12,7 +12,7 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-        <a class="navbar-brand">บริจาคโลหิต</a>
+        <a class="navbar-brand">BDA : <?= $_SESSION['username']; ?></a>
     </div>
 </nav>
 
