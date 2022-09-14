@@ -8,21 +8,12 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 
 $dateThai = new DateThai();
 
-$basicinformation_tb = isset($_SESSION['basicinformation_tb']) ? $_SESSION['basicinformation_tb'] : [];
-$donationprocess_tb = isset($_SESSION['donationprocess_tb']) ? $_SESSION['donationprocess_tb'] : [];
-
-$preparing_blooddonation_tb = isset($_SESSION['preparing_blooddonation_tb']) ? $_SESSION['preparing_blooddonation_tb'] : [];
-
-$makingappointments_tb = isset($_SESSION['makingappointments_tb']) ? $_SESSION['makingappointments_tb'] : [];
-$formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [];
-
 ?>
 <?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/header.php'); ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Component/navbar.php'); ?>
 
 <style>
-    
     .card-main {
         margin-top: 30px;
         margin-bottom: 40px;
@@ -81,125 +72,29 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <!-- ข้อมูลพื้นฐานต่าง ๆ -->
                 <div class="tab-pane fade show active" id="pills-basic-information" role="tabpanel" aria-labelledby="pills-basic-information-tab" tabindex="0">
-                    <!-- ข้อมูลพื้นฐานต่าง ๆ -->
                     <nav>
                         <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-blood-center-tab" data-bs-toggle="tab" data-bs-target="#nav-blood-center" type="button" role="tab" aria-controls="nav-blood-center" aria-selected="true">ศูนย์บริการโลหิต</button>
                             <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">ขั้นตอนการบริจาคโลหิต</button>
                             <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">การเตรียมตัวก่อนหลังบริจาคโลหิต</button>
-                            <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <!-- ศูนย์บริการโลหิต -->
                         <div class="tab-pane fade show active" id="nav-blood-center" role="tabpanel" aria-labelledby="nav-blood-center-tab" tabindex="0">
-                            <table class="table table-bordered text-center display" id="basicinformation_tb" style="width:100%">
-                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
-                                    <tr>
-                                        <td>#</td>
-                                        <td>ชื่อศูนย์บริการโลหิต</td>
-                                        <td>ที่ตั้ง</td>
-                                        <td>เปิด / ปิด</td>
-                                        <td>จังหวัด</td>
-                                        <td>เขต</td>
-                                        <td>ติดต่อ</td>
-                                        <td>รายละเอียด</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 0;
-                                    foreach ($basicinformation_tb as $key => $values) : ?>
-                                        <tr>
-                                            <td><?= ($i + 1); ?></td>
-                                            <td><?= $values->nameSc; ?></td>
-                                            <td><?= $values->addressSc; ?></td>
-                                            <td><?= $values->officeHoursSc; ?></td>
-                                            <td><?= $values->provinceSc; ?></td>
-                                            <td><?= $values->districtSc; ?></td>
-                                            <td><?= $values->phoneNumberSc; ?></td>
-                                            <td><a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/userViewBasicInformation.php?bc_id=<?= $values->bc_id; ?>" role="button">เพิ่มเติม</a></td>
-                                        </tr>
-                                    <?php $i++;
-                                    endforeach; ?>
-                                </tbody>
-                            </table>
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/basicinformation_tb.php'); ?>
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
-                            <table class="table table-bordered display" id="donationprocess_tb" style="width:100%">
-                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
-                                    <tr>
-                                        <td>#</td>
-                                        <td>ขั้นตอนที่ 1</td>
-                                        <td>ขั้นตอนที่ 2</td>
-                                        <td>ขั้นตอนที่ 3</td>
-                                        <td>ขั้นตอนที่ 4</td>
-                                        <td>ขั้นตอนที่ 5</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 0;
-                                    foreach ($donationprocess_tb as $key => $values) : ?>
-                                        <tr>
-                                            <td><?= ($i + 1); ?></td>
-                                            <td><?= $values->donationStep1; ?></td>
-                                            <td><?= $values->donationStep2; ?></td>
-                                            <td><?= $values->donationStep3; ?></td>
-                                            <td><?= $values->donationStep4; ?></td>
-                                            <td><?= $values->donationStep5; ?></td>
-                                        </tr>
-                                    <?php $i++;
-                                    endforeach; ?>
-                                </tbody>
-                            </table>
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/donationprocess_tb.php'); ?>
                         </div>
                         <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                            การเตรียมตัวก่อนหลังบริจาคโลหิต
-                            <table class="table table-bordered text-center display" id="preparing_blooddonation_tb" style="width:100%">
-                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
-                                    <tr>
-                                        <td>#</td>
-                                        <td>ส่วนที่ 1</td>
-                                        <td>ส่วนที่ 2</td>
-                                        <td>ส่วนที่ 3</td>
-                                        <td>ส่วนที่ 4</td>
-                                        <td>ส่วนที่ 5</td>
-                                        <td>ส่วนที่ 6</td>
-                                        <td>ส่วนที่ 7</td>
-                                        <td>ส่วนที่ 8</td>
-                                        <td>รายละเอียด</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 0;
-                                    foreach ($preparing_blooddonation_tb as $key => $values) : ?>
-                                        <tr>
-                                            <td>#</td>
-                                            <td><?= $values->pbDetail1; ?></td>
-                                            <td><?= $values->pbDetail2; ?></td>
-                                            <td><?= $values->pbDetail3; ?></td>
-                                            <td><?= $values->pbDetail4; ?></td>
-                                            <td><?= $values->pbDetail5; ?></td>
-                                            <td><?= $values->pbDetail6; ?></td>
-                                            <td><?= $values->pbDetail7; ?></td>
-                                            <td><?= $values->pbDetail8; ?></td>
-                                            <td><a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/userViewBasicInformation.php?bc_id=<?= $values->pb_id; ?>" role="button">เพิ่มเติม</a></td>
-                                        </tr>
-                                    <?php $i++;
-                                    endforeach; ?>
-                                </tbody>
-                            </table>
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/preparing_blooddonation_tb.php'); ?>
                         </div>
-                        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
                     </div>
-                    <!--  -->
                 </div>
-                <!-- แบบฟอร์มบริจาคโลหิต -->
                 <div class="tab-pane fade" id="pills-bloodDonationForm" role="tabpanel" aria-labelledby="pills-bloodDonationForm-tab" tabindex="0">
                     <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/bloodDonationForm.php'); ?>
                 </div>
-                <!-- ข้อมูลการนัดหมาย -->
                 <div class="tab-pane fade" id="pills-appointments" role="tabpanel" aria-labelledby="pills-appointments-tab" tabindex="0">
                     <ul class="nav nav-tabs nav justify-content-end" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -210,78 +105,17 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <!-- ข้อมูลการนัดหมาย -->
                         <div class="tab-pane fade show active" id="appointmentsShowData-tab-pane" role="tabpanel" aria-labelledby="appointmentsShowData-tab" tabindex="0">
-                            <table class="table table-bordered text-center display" id="appointmentsShowData" style="width:100%">
-                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
-                                    <tr>
-                                        <td>#</td>
-                                        <td>วันที่นัดหมาย</td>
-                                        <td>ช่วงการนัดหมาย</td>
-                                        <td>เวลาการนัดหมาย</td>
-                                        <td>สถานะ</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php $i = 0;
-                                    foreach ($makingappointments_tb as $key => $values) : ?>
-                                        <tr>
-                                            <td><?= ($i + 1); ?></td>
-                                            <td><?= $dateThai->get($values->dateApp)->dayMonthYearCut(); ?></td>
-                                            <td><?= $values->durationApp; ?></td>
-                                            <td><?= $values->durationTime; ?></td>
-                                            <?php if ($values->durationStatus == 0) : ?>
-                                                <td><span class="badge text-bg-warning">ยังไม่นัดหมาย</span></td>
-                                            <?php elseif ($values->durationStatus == 1) : ?>
-                                                <td><span class="badge text-bg-success">นัดหมายสำเร็จ</span></td>
-                                            <?php endif; ?>
-                                        </tr>
-                                    <?php $i++;
-                                    endforeach; ?>
-                                </tbody>
-                            </table>
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/appointmentsShowData.php'); ?>
                         </div>
-                        <!-- ข้อมูลเเบบฟอร์มบริจาคโลหิต -->
                         <div class="tab-pane fade" id="formBloodData-tab-pane" role="tabpanel" aria-labelledby="formBloodData-tab" tabindex="0">
-                            <table class="table table-bordered text-center display" id="formBloodData" style="width:100%">
-                                <thead style="background-color: #0F3D81; color: #FFFFFF;">
-                                    <tr>
-                                        <td>#</td>
-                                        <td>คำถามที่ 1</td>
-                                        <td>คำถามที่ 2</td>
-                                        <td>คำถามที่ 3</td>
-                                        <td>คำถามที่ 4</td>
-                                        <td>คำถามที่ 5</td>
-                                        <td>คำถามที่ 6</td>
-                                        <td>สถานะ</td>
-                                        <td>รายละเอียด</td>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($formblood_tb  as $key => $values) : ?>
-                                        <tr>
-                                            <td><?= $values->form_id; ?></td>
-                                            <td><?= $values->healthCategoryQ1; ?></td>
-                                            <td><?= $values->healthCategoryQ2; ?></td>
-                                            <td><?= $values->healthCategoryQ3; ?></td>
-                                            <td><?= $values->healthCategoryQ4; ?></td>
-                                            <td><?= $values->healthCategoryQ5; ?></td>
-                                            <td><?= $values->healthCategoryQ6; ?></td>
-                                            <?php if ($values->formStatus == 1) : ?>
-                                                <td><span class="badge text-bg-success">ทำเเบบสอบถามเเล้ว</span></td>
-                                            <?php endif; ?>
-                                            <td><a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/userViewFormBlood.php?form_id=<?= $values->form_id; ?>" role="button">เรียกดู</a></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                </tbody>
-                            </table>
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/formBloodData.php'); ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
@@ -289,21 +123,21 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
 <script>
     $(document).ready(function() {
 
-        function fnDataTable(tbID) {
-            return $(tbID).DataTable();
-        }
-
         var url = '';
-        
-        getDataToTable(fnDataTable('#basicinformation_tb'), '../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_showDataBasicInfo.php', <?= $_SESSION['user_id']; ?>);
 
-        getDataToTable(fnDataTable('#appointmentsShowData'), '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_showDataAppointments.php', <?= $_SESSION['user_id']; ?>);
+        getDataToTable('#basicinformation_tb', '../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_showDataBasicInfo.php', <?= $_SESSION['user_id']; ?>);
 
-        getDataToTable(fnDataTable('#preparing_blooddonation_tb'), '../../../../bloodDonationProjectCS60/MyApp/Web/PreparingBlooddonation/web_PreparingBloodDonationController_showDataPreparingBlooddonation.php', <?= $_SESSION['user_id']; ?>);
+        getDataToTable('#appointmentsShowData', '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_showDataAppointments.php', {
+            user_id: <?= $_SESSION['user_id']; ?>
+        });
 
-        getDataToTable(fnDataTable('#formBloodData'), '../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBlood.php', <?= $_SESSION['user_id']; ?>);
+        getDataToTable('#preparing_blooddonation_tb', '../../../../bloodDonationProjectCS60/MyApp/Web/PreparingBlooddonation/web_PreparingBloodDonationController_showDataPreparingBlooddonation.php', <?= $_SESSION['user_id']; ?>);
 
-        getDataToTable(fnDataTable('#donationprocess_tb'), '../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_showDataDonationProcess.php', <?= $_SESSION['user_id']; ?>);
+        getDataToTable('#formBloodData', '../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBlood.php', {
+            user_id: <?= $_SESSION['user_id']; ?>
+        });
+
+        getDataToTable('#donationprocess_tb', '../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_showDataDonationProcess.php', <?= $_SESSION['user_id']; ?>);
 
         function getDataToTable(dataTable, url, data) {
             $.ajax({
@@ -312,13 +146,10 @@ $formblood_tb = isset($_SESSION['formblood_tb']) ? $_SESSION['formblood_tb'] : [
                 url: url,
                 data: data,
                 success: function(response) {
-                    dataTable;
+                    console.log(response);
+                    $(dataTable).DataTable();
                 }
             });
         }
     });
-
-    function createDataTable() {
-
-    }
 </script>
