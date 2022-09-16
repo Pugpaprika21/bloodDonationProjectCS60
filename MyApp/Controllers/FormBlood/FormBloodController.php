@@ -31,6 +31,7 @@ class FormBloodController
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('กรุณาทำเเบบสอบถามเเสดงความประสงค์บริจาคโลหิตในวันที่ ' . $dayMonthYearTomorrow);
+            
         } else {
 
             $str = $strClean::letter($request);
