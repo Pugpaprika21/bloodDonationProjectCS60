@@ -45,9 +45,7 @@ class Request
 
         $requestsArray = ['post' => $post, 'get' => $get, 'files' => $files];
         $requestsObject = (object)['post' => (object)$post, 'get' => (object)$get, 'files' => (object)$files];
-        // foreach ($post as $postKey => $postVal) {
-        //     $postResult = $post[$postKey] = htmlspecialchars(strip_tags($postVal));
-        // }
+
         self::$requestsArray = $requestsArray;
         self::$requestsObject = $requestsObject;
         return new self;
