@@ -28,9 +28,7 @@ class FormBloodController
         if (isset($query[0]->form_id) == $request->form_id) {
 
             $tomorrow = date('Y-m-d', strtotime(date('Y-m-d') . '+1 days'));
-            $dayMonthYearTomorrow = (new DateThai())
-                ->get($tomorrow)
-                ->dayMonthYearCut();
+            $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('กรุณาทำเเบบสอบถามเเสดงความประสงค์บริจาคโลหิตในวันที่ ' . $dayMonthYearTomorrow);
         } else {
