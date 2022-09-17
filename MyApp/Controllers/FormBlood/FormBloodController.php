@@ -31,7 +31,6 @@ class FormBloodController
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('กรุณาทำเเบบสอบถามเเสดงความประสงค์บริจาคโลหิตในวันที่ ' . $dayMonthYearTomorrow);
-            
         } else {
 
             $str = $strClean::letter($request);
@@ -81,6 +80,18 @@ class FormBloodController
         } else {
             $_SESSION['formblood_tb_all'] = [];
             Response::error();
+        }
+    }
+    /**
+     * @return void
+     */
+    public function getAllformBlood(): void
+    {
+        $sql = "SELECT * FROM formblood_tb";
+        $query = (new Query())->select($sql);
+
+        if (count($query) > 0) { 
+            Response::render($query)->jsonString();
         }
     }
 }

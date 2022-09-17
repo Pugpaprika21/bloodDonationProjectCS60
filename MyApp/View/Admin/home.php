@@ -44,6 +44,11 @@ $dateThai = new DateThai();
         margin-top: 15px;
     }
 
+    #formBlood_info,
+    #formBlood_paginate {
+        margin-top: 15px;
+    }
+
     thead {
         background-color: #4C5DC6;
         color: #FFFFFF;
@@ -92,7 +97,7 @@ $dateThai = new DateThai();
                         </div>
                         <!-- formBlood -->
                         <div class="tab-pane fade" id="nav-formBlood" role="tabpanel" aria-labelledby="nav-formBlood-tab" tabindex="0">
-                            ข้อมูลเเบบฟอร์มเเสดงความประสงค์
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/formBlood.php'); ?>
                         </div>
                         <!-- appointment -->
                         <div class="tab-pane fade" id="nav-appointment" role="tabpanel" aria-labelledby="nav-appointment-tab" tabindex="0">
@@ -187,7 +192,6 @@ $dateThai = new DateThai();
                 dataType: "json",
                 url: "../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_getAllUserData.php",
                 success: function (response) {
-                    //console.log(response);
                     let dt = $('#userData').DataTable({
                         data: response,
                         columns: [
@@ -233,7 +237,49 @@ $dateThai = new DateThai();
                 }
             });
         })();
-        // ...
+
+        // ... getAllformBlood
+        (function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_getAllformBlood.php",
+                success: function (response) {
+                    console.log(response);
+
+                    let dt = $('#formBlood').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'form_id'},
+                            {data: 'healthCategoryQ1'},
+                            {data: 'healthCategoryQ2'},
+                            {data: 'healthCategoryQ3'},
+                            {data: 'healthCategoryQ4'},
+                            {data: 'healthCategoryQ5'},
+                            {data: 'healthCategoryQ6'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 7,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-info btn-sm text-white" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_formBlood.php?form_id=${row.form_id}" role="button">ดูรายละเอียด</a>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
+                }
+            });
+        })();
     });
 
     function btnDelete(id, text, url) {
