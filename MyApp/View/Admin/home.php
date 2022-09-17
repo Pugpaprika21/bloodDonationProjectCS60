@@ -40,6 +40,10 @@ $dateThai = new DateThai();
         margin-top: 15px;
     }
 
+    #userData_info, #userData_paginate {
+        margin-top: 15px;
+    }
+
     thead {
         background-color: #4C5DC6;
         color: #FFFFFF;
@@ -74,18 +78,27 @@ $dateThai = new DateThai();
                     <nav>
                         <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-chartJs-tab" data-bs-toggle="tab" data-bs-target="#nav-chartJs" type="button" role="tab" aria-controls="nav-chartJs" aria-selected="true">ข้อมูลต่างๆ</button>
+                            <button class="nav-link" id="nav-userData-tab" data-bs-toggle="tab" data-bs-target="#nav-userData" type="button" role="tab" aria-controls="nav-userData" aria-selected="false">สมาชิก</button>
+                            <button class="nav-link" id="nav-formBlood-tab" data-bs-toggle="tab" data-bs-target="#nav-formBlood" type="button" role="tab" aria-controls="nav-formBlood" aria-selected="true">ข้อมูลเเบบฟอร์มเเสดงความประสงค์</button>
                             <button class="nav-link" id="nav-appointment-tab" data-bs-toggle="tab" data-bs-target="#nav-appointment" type="button" role="tab" aria-controls="nav-appointment" aria-selected="false">นัดหมายบริจาคโลหิต</button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</button>
                             <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-chartJs" role="tabpanel" aria-labelledby="nav-chartJs-tab" tabindex="0">...</div>
+                        <!-- userData -->
+                        <div class="tab-pane fade" id="nav-userData" role="tabpanel" aria-labelledby="nav-userData-tab" tabindex="0">
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/userData_tb.php'); ?>
+                        </div>
+                        <!-- formBlood -->
+                        <div class="tab-pane fade" id="nav-formBlood" role="tabpanel" aria-labelledby="nav-formBlood-tab" tabindex="0">
+                            ข้อมูลเเบบฟอร์มเเสดงความประสงค์
+                        </div>
                         <!-- appointment -->
                         <div class="tab-pane fade" id="nav-appointment" role="tabpanel" aria-labelledby="nav-appointment-tab" tabindex="0">
                             <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/appointment_tb.php'); ?>
                         </div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">...</div>
+                        
                         <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
                     </div>
                     <!-- nav-chaild home -->
@@ -143,7 +156,7 @@ $dateThai = new DateThai();
                                     return `
                                         <div class="d-grid gap-2 d-md-block">
                                             <a class="btn btn-warning btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/appointment_edit.php?makApp_id=${row.makApp_id}" role="button">เเก้ไข</a>
-                                            <a class="btn btn-danger btn-sm" href="#" role="button">ลบ</a>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="btnDelete(${row.makApp_id}, 'ต้องการลบข้อมูลการนัดหมายรหัส ', '../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_deleteAppointmentByID.php');">ลบ</button>
                                         </div>
                                     `;
                                 }
@@ -167,7 +180,95 @@ $dateThai = new DateThai();
             });
         })();
 
-        // ...
+        // ... getAllUserData
+        (function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_getAllUserData.php",
+                success: function (response) {
+                    //console.log(response);
+                    let dt = $('#userData').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'user_id'},
+                            {data: 'username'},
+                            {data: 'password'},
+                            {data: 'firstname'},
+                            {data: 'lastname'},
+                            {data: 'gender'},
+                            {data: 'bloodType'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 7,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-info btn-sm text-white" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_userData.php?user_id=${row.user_id}" role="button">ดู</a>
+                                            <a class="btn btn-warning btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_userEditData.php?user_id=${row.user_id}" role="button">เเก้ไข</a>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="btnDelete(${row.user_id}, 'ต้องการลบข้อมูลการนัดหมายรหัส ', '../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_deleteAppointmentByID.php');">ลบ</button>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
 
+                    dt.on('order.dt search.dt', function() {
+                        let i = 1;
+                        dt.cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        }).every(function(cell) {
+                            this.data(i++);
+                        });
+                    }).draw();
+                }
+            });
+        })();
+        // ...
     });
+
+    function btnDelete(id, text, url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: text + id + " หรือไม่",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "GET",
+                    dataType: "json",
+                    url: url,
+                    data: {
+                        id: id
+                    },
+                    success: function (response) {
+                        if (response.status == 200) {
+                            Swal.fire(
+                                'สำเร็จ',
+                                'ลบข้อมูลการนัดหมายบริจาคโลหิตสำเร็จ',
+                                'success'
+                            ).then((result) => {
+                                window.location.reload();
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    }
+
 </script>
+

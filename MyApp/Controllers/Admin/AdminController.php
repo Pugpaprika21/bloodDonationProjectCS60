@@ -69,4 +69,59 @@ class AdminController
             Response::error();
         }
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function deleteAppointmentByID(object $request): void
+    {
+        $strClean = new StringDifferent();
+
+        $sql = "DELETE FROM makingappointments_tb WHERE makApp_id =:makApp_id";
+        $query = (new Query())->delete($sql, [
+            'makApp_id' => $strClean->clean($request->id)
+        ]);
+
+        if ($query ) {
+            Response::success();
+        } else {
+            Response::error();
+        }
+    }
+    /**
+     * @return void
+     */
+    public function getAllUserData(): void
+    {
+        $sql = "SELECT * FROM user_tb";
+        $query = (new Query())->select($sql);
+
+        if (count($query) > 0) {
+            Response::render($query)->jsonString();
+        }
+    }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function getUserByID(object $request): void
+    {
+        $strClean = new StringDifferent();
+
+        $sql = "SELECT * FROM user_tb WHERE user_id =:user_id";
+        $query = (new Query())->select($sql, [
+            'user_id' => $strClean->clean($request->user_id)
+        ]);
+
+        if (count($query) > 0) {
+            Response::render($query)->jsonString();
+        }
+    }
 }
+
+
+
+
+
+
+

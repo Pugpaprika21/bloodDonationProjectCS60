@@ -30,7 +30,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/home.php">กลับสู่หน้าหลัก</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">เเก้ไขการนัดหมายบริจาคโลหิต</li>
+                    <li class="breadcrumb-item active" aria-current="page">เเก้ไขข้อมูลการนัดหมายบริจาคโลหิต</li>
                 </ol>
             </nav>
             <form method="post" id="form-appointment-edit">
@@ -60,7 +60,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-2">
-                        <button type="submit" class="btn btn-success btn-sm w-100">เเก่ไข</button>
+                        <button type="submit" class="btn btn-warning btn-sm w-100">เเก่ไข</button>
                     </div>
                 </div>
             </form>
@@ -72,13 +72,12 @@
 
 <script src="../../../../bloodDonationProjectCS60/MyApp/Asset/Js/public/urlSearchParams.js"></script>
 
-
 <script>
     $(document).ready(function() {
-        
+
         var url = urlSearchParams('makApp_id');
 
-        (function () {
+        (function() {
             $.ajax({
                 type: "GET",
                 dataType: "json",
@@ -86,8 +85,8 @@
                 data: {
                     makApp_id: url
                 },
-                success: function (response) {
-                    response.forEach(function (data) {
+                success: function(response) {
+                    response.forEach(function(data) {
                         $('#dateApp').val(data.dateApp);
                         $('#durationApp').val(data.durationApp);
                         $('#durationTime').val(data.durationTime);
@@ -108,17 +107,26 @@
             $.ajax({
                 type: "POST",
                 dataType: "json",
-                url: "url",
-                data: "data",
-                success: function (response) {
-                    
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_editAppointmentByID.php",
+                data: {
+                    dateApp: dateApp,
+                    durationApp: durationApp,
+                    durationTime: durationTime,
+                    durationStatus: durationStatus,
+                    makApp_id: url
+                },
+                success: function(response) {
+                    if (response.status == 200) {
+                        Swal.fire(
+                            'สำเร็จ',
+                            'เเก้ไขข้อมูลการนัดหมายบริจาคโลหิตสำเร็จ',
+                            'success'
+                        ).then((result) => {
+                            window.location.reload();
+                        });
+                    }
                 }
             });
-
-
         });
-
     });
 </script>
-
-
