@@ -21,7 +21,7 @@ class MakingAppointmentsController
     {
         $str = new StringDifferent();
         $sql = "SELECT * FROM makingappointments_tb WHERE user_id =:user_id AND dateApp =:dateApp";
-        
+
         $query = (new Query())->select($sql, [
             'user_id' => $str->clean($request->user_id),
             'dateApp' => $str->clean($request->dateApp),
@@ -33,7 +33,6 @@ class MakingAppointmentsController
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('นัดหมายบริจาคโลหิตได้อีกภายในวันที่ ' . $dayMonthYearTomorrow);
-
         } else {
 
             $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
