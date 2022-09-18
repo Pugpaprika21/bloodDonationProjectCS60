@@ -51,11 +51,10 @@
 
 
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/component/navbar.php'); ?>
-<!-- content -->
+
 <div class="container-fluid container-main">
     <div class="card shadow rounded">
         <div class="card-body">
-            <!-- main-nav-tab -->
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">หน้าเเรก</button>
@@ -66,43 +65,30 @@
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-editAsDelete-tab" data-bs-toggle="pill" data-bs-target="#pills-editAsDelete" type="button" role="tab" aria-controls="pills-editAsDelete" aria-selected="false">เเก้ไข / ลบ</button>
                 </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" disabled>Disabled</button>
-                </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <!-- หน้าเเรก -->
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                    <!-- nav-chaild home -->
                     <nav>
                         <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-chartJs-tab" data-bs-toggle="tab" data-bs-target="#nav-chartJs" type="button" role="tab" aria-controls="nav-chartJs" aria-selected="true">ข้อมูลต่างๆ</button>
                             <button class="nav-link" id="nav-userData-tab" data-bs-toggle="tab" data-bs-target="#nav-userData" type="button" role="tab" aria-controls="nav-userData" aria-selected="false">สมาชิก</button>
                             <button class="nav-link" id="nav-formBlood-tab" data-bs-toggle="tab" data-bs-target="#nav-formBlood" type="button" role="tab" aria-controls="nav-formBlood" aria-selected="true">ข้อมูลเเบบฟอร์มเเสดงความประสงค์</button>
                             <button class="nav-link" id="nav-appointment-tab" data-bs-toggle="tab" data-bs-target="#nav-appointment" type="button" role="tab" aria-controls="nav-appointment" aria-selected="false">นัดหมายบริจาคโลหิต</button>
-                            <button class="nav-link" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Disabled</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-chartJs" role="tabpanel" aria-labelledby="nav-chartJs-tab" tabindex="0">...</div>
-                        <!-- userData -->
                         <div class="tab-pane fade" id="nav-userData" role="tabpanel" aria-labelledby="nav-userData-tab" tabindex="0">
                             <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/userData_tb.php'); ?>
                         </div>
-                        <!-- formBlood -->
                         <div class="tab-pane fade" id="nav-formBlood" role="tabpanel" aria-labelledby="nav-formBlood-tab" tabindex="0">
                             <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/formBlood.php'); ?>
                         </div>
-                        <!-- appointment -->
                         <div class="tab-pane fade" id="nav-appointment" role="tabpanel" aria-labelledby="nav-appointment-tab" tabindex="0">
                             <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/appointment_tb.php'); ?>
                         </div>
-                        
-                        <div class="tab-pane fade" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">...</div>
                     </div>
-                    <!-- nav-chaild home -->
                 </div>
-                <!-- จัดการ -->
                 <div class="tab-pane fade" id="pills-insertData" role="tabpanel" aria-labelledby="pills-insertData-tab" tabindex="0">
                     <nav>
                         <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
@@ -119,7 +105,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- nav-chaild editAsDelete -->
                 <div class="tab-pane fade" id="pills-editAsDelete" role="tabpanel" aria-labelledby="pills-editAsDelete-tab" tabindex="0">
                     <nav>
                         <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
@@ -136,7 +121,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
             </div>
         </div>
     </div>
