@@ -100,7 +100,6 @@ class FormBloodController
      */
     public function getAllformBloodByID(object $request): void
     {
-
         $strClean = new StringDifferent();
 
         $sql = "SELECT * FROM formblood_tb WHERE form_id =:form_id";

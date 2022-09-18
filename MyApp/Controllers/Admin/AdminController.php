@@ -82,7 +82,7 @@ class AdminController
             'makApp_id' => $strClean->clean($request->id)
         ]);
 
-        if ($query ) {
+        if ($query) {
             Response::success();
         } else {
             Response::error();
@@ -117,11 +117,51 @@ class AdminController
             Response::render($query)->jsonString();
         }
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function editUserByID(object $request): void
+    {
+        $strClean = new StringDifferent();
+
+        $sql = "UPDATE user_tb SET 
+                    username =:username, password =:password, firstname =:firstname, lastname =:lastname,
+                    gender =:gender, dateOfBirth =:dateOfBirth, bloodType =:bloodType, weight =:weight,
+                    height =:height, address =:address, subDistrict =:subDistrict, road =:road,
+                    district =:district, province =:province, postCode =:postCode, idCard =:idCard,
+                    email =:email, phoneNumber =:phoneNumber
+                WHERE user_id =:user_id";
+
+        $query = (new Query())->update($sql, [
+            'username' => $strClean->clean($request->username),
+            'password' => $strClean->clean($request->password),
+            'firstname' => $strClean->clean($request->firstname),
+            'lastname' => $strClean->clean($request->lastname),
+            'gender' => $strClean->clean($request->gender),
+            'dateOfBirth' => $strClean->clean($request->dateOfBirth),
+            'bloodType' => $strClean->clean($request->bloodType),
+            'weight' => $strClean->clean($request->weight),
+            'height' => $strClean->clean($request->height),
+            'address' => $strClean->clean($request->address),
+            'subDistrict' => $strClean->clean($request->subDistrict),
+            'road' => $strClean->clean($request->road),
+            'district' => $strClean->clean($request->district),
+            'province' => $strClean->clean($request->province),
+            'postCode' => $strClean->clean($request->postCode),
+            'idCard' => $strClean->clean($request->idCard),
+            'email' => $strClean->clean($request->email),
+            'phoneNumber' => $strClean->clean($request->phoneNumber),
+            'user_id' => $strClean->clean($request->user_id)
+        ]);
+
+        if ($query) {
+            Response::success();
+        } else {
+            Response::error();
+        }
+    }
 }
-
-
-
-
 
 
 

@@ -25,6 +25,7 @@
 </style>
 
 <div class="container-fluid container-main">
+
     <div class="card shadow rounded">
         <div class="card-body">
             <nav aria-label="breadcrumb">
@@ -33,6 +34,11 @@
                     <li class="breadcrumb-item active" aria-current="page">รายละเอียดข้อมูลสมาชิก</li>
                 </ol>
             </nav>
+        </div>
+    </div>
+
+    <div class="card shadow rounded">
+        <div class="card-body">
             <div class="row g-3">
                 <div class="text-personal-information">
                     ข้อมูลส่วนตัว ----
@@ -226,5 +232,3 @@
         })();
     });
 </script>
-
-
