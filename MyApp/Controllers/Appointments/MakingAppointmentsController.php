@@ -105,4 +105,23 @@ class MakingAppointmentsController
 
         return $countResult;
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function getAppointmentsDataByID(object $request): void
+    {
+        $str = new StringDifferent();
+
+        $sql = "SELECT * FROM makingappointments_tb WHERE user_id =:user_id";
+        $query = (new Query())->select($sql, [
+            'user_id' => $str->clean($request->user_id)
+        ]);
+
+        if (count($query) > 0) {
+            Response::render($query)->jsonString();
+        }
+    }
 }
+
+

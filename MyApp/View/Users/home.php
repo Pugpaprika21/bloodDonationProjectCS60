@@ -265,5 +265,100 @@ $dateThai = new DateThai();
                 }
             });
         })();
+
+        // ... appointmentsShowData
+        (function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_getAppointmentsDataByID.php",
+                data: {
+                    user_id: <?= $_SESSION['user_id']; ?>
+                },
+                success: function (response) {
+                    let dt = $('#appointmentsShowData').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'makApp_id'},
+                            {data: 'dateApp'},
+                            {data: 'durationApp'},
+                            {data: 'durationTime'},
+                            {data: 'durationStatus'},
+                        ],
+                        columnDefs: [{
+                                targets: 4,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    if (row.durationStatus == 0) {
+                                        return `<span class="badge text-bg-success">นัดหมายเเล้ว</span>`;
+                                    } else {
+                                        return `<span class="badge text-bg-warning">ยังไม่นัดหมาย</span>`;
+                                    }
+                                }
+                        }]
+                    });
+
+                    dt.on('order.dt search.dt', function() {
+                        let i = 1;
+                        dt.cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        }).every(function(cell) {
+                            this.data(i++);
+                        });
+                    }).draw();
+                }
+            });
+        })();
+
+        // ... getAllformBlood
+        (function () {
+            $.ajax({
+                type: "GET",   
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_getformBloodByID.php",
+                data: {
+                    user_id: <?= $_SESSION['user_id']; ?>
+                },
+                success: function (response) {
+                    console.log(response);
+                    let dt = $('#formBloodData').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'form_id'},
+                            {data: 'healthCategoryQ1'},
+                            {data: 'healthCategoryQ2'},
+                            {data: 'healthCategoryQ3'},
+                            {data: 'healthCategoryQ4'},
+                            {data: 'healthCategoryQ5'},
+                            {data: 'healthCategoryQ6'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 7,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-info btn-sm text-white" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/view_formBlood.php?form_id=${row.form_id}" role="button">ดูรายละเอียด</a>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
+                }
+            });
+        })();
+
+
+
+
     });
 </script>
