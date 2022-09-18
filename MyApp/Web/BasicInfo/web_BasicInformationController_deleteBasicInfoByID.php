@@ -8,7 +8,7 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $request = Request::get()->toStdClass();
-    (new BasicInformationController())->showDataBasicInfo($request);
+    (new BasicInformationController())->deleteBasicInfoByID($request);
 }
 
 

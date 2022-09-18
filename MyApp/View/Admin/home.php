@@ -38,6 +38,11 @@
         margin-top: 15px;
     }
 
+    #editAsDelBasicInfo_info,
+    #editAsDelBasicInfo_paginate {
+        margin-top: 15px;
+    }
+
     thead {
         background-color: #4C5DC6;
         color: #FFFFFF;
@@ -59,7 +64,7 @@
                     <button class="nav-link" id="pills-insertData-tab" data-bs-toggle="pill" data-bs-target="#pills-insertData" type="button" role="tab" aria-controls="pills-insertData" aria-selected="false">เพิ่มข้อมูล</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-editAsDelete-tab" data-bs-toggle="pill" data-bs-target="#pills-editAsDelete" type="button" role="tab" aria-controls="pills-editAsDelete" aria-selected="false">editAsDelete</button>
+                    <button class="nav-link" id="pills-editAsDelete-tab" data-bs-toggle="pill" data-bs-target="#pills-editAsDelete" type="button" role="tab" aria-controls="pills-editAsDelete" aria-selected="false">เเก้ไข / ลบ</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-disabled-tab" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" disabled>Disabled</button>
@@ -114,7 +119,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pills-editAsDelete" role="tabpanel" aria-labelledby="pills-editAsDelete-tab" tabindex="0">...</div>
+                <!-- nav-chaild editAsDelete -->
+                <div class="tab-pane fade" id="pills-editAsDelete" role="tabpanel" aria-labelledby="pills-editAsDelete-tab" tabindex="0">
+                    <nav>
+                        <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-editAsDelBasicInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-editAsDelBasicInfo" type="button" role="tab" aria-controls="nav-editAsDelBasicInfo" aria-selected="true">ข้อมูลพื้นฐาน</button>
+                            <button class="nav-link" id="nav-editAsDelDonationProcess-tab" data-bs-toggle="tab" data-bs-target="#nav-editAsDelDonationProcess" type="button" role="tab" aria-controls="nav-editAsDelDonationProcess" aria-selected="false">ขั้นตอนการบริจาคโลหิต</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-editAsDelBasicInfo" role="tabpanel" aria-labelledby="nav-editAsDelBasicInfo-tab" tabindex="0">
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/editAsDelBasicInfo_tb.php'); ?>
+                        </div>
+                        <div class="tab-pane fade" id="nav-editAsDelDonationProcess" role="tabpanel" aria-labelledby="nav-editAsDelDonationProcess-tab" tabindex="0">
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/editAsDelDonationProcess_tb.php'); ?>
+                        </div>
+                    </div>
+                </div>
                 <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
             </div>
         </div>
@@ -330,6 +351,109 @@
                 }
             });
         });
+
+        // ... editAsDelBasicInfo
+        (function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_getAllBasicInfo.php",
+                success: function (response) {
+                    let dt = $('#editAsDelBasicInfo').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'bc_id'},
+                            {data: 'nameSc'},
+                            {data: 'addressSc'},
+                            {data: 'officeHoursSc'},
+                            {data: 'provinceSc'},
+                            {data: 'districtSc'},
+                            {data: 'subDistrictSc'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 7,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-warning btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_EditDataBasicInfo.php?bc_id=${row.bc_id}" role="button">เเก้ไข</a>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="btnDelete(${row.bc_id}, 'ต้องการลบข้อมูลศูนย์บริการโลหิตรหัส ', '../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_deleteBasicInfoByID.php');">ลบ</button>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
+
+                    dt.on('order.dt search.dt', function() {
+                        let i = 1;
+                        dt.cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        }).every(function(cell) {
+                            this.data(i++);
+                        });
+                    }).draw();
+                }
+            });
+        })();
+
+        // ... editAsDelDonationProcess
+        (function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_getAllDonationProcess.php",
+                success: function (response) {
+                    let dt = $('#editAsDelDonationProcess').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'dona_id'},
+                            {data: 'donationStep1'},
+                            {data: 'donationStep2'},
+                            {data: 'donationStep3'},
+                            {data: 'donationStep4'},
+                            {data: 'donationStep5'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 6,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-warning btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_EditDatDonationProcess.php?dona_id=${row.dona_id}" role="button">เเก้ไข</a>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="btnDelete(${row.dona_id}, 'ต้องการลบข้อมูลขั้นตอนการบริจาคโลหิตรหัส ', '../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_deleteDonationProcessByID.php');">ลบ</button>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
+
+                    dt.on('order.dt search.dt', function() {
+                        let i = 1;
+                        dt.cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        }).every(function(cell) {
+                            this.data(i++);
+                        });
+                    }).draw();
+                }
+            });
+        })();
 
     });
 

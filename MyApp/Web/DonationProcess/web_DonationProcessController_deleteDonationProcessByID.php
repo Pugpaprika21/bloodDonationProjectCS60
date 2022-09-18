@@ -1,6 +1,6 @@
 <?php
 
-use MyApp\Controllers\BasicInfo\BasicInformationController;
+use MyApp\Controllers\DonationProcess\DonationProcessController;
 use MyApp\Http\HttpRequest\Request;
 
 require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
@@ -8,7 +8,5 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $request = Request::get()->toStdClass();
-    (new BasicInformationController())->showDataBasicInfo($request);
+    (new DonationProcessController())->deleteDonationProcessByID($request);
 }
-
-
