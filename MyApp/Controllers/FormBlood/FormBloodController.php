@@ -94,4 +94,24 @@ class FormBloodController
             Response::render($query)->jsonString();
         }
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function getAllformBloodByID(object $request): void
+    {
+
+        $strClean = new StringDifferent();
+
+        $sql = "SELECT * FROM formblood_tb WHERE form_id =:form_id";
+        $query = (new Query())->select($sql, [
+            'form_id' => $strClean->clean($request->form_id)
+        ]);
+
+        if (count($query) > 0) { 
+            $_SESSION['formbloodByID'] = $query;
+            Response::render($query)->jsonString();
+        }
+    }
 }
+
