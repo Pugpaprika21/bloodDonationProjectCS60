@@ -12,42 +12,7 @@
     <style>
         body {
             font-family: 'Mitr', sans-serif;
-            background-color: #FFFAEB;
         }
-
-        /* .container {
-            margin-top: 30px;
-            padding-bottom: 50px;
-        }
-
-        .card-top {
-            margin-top: 35px;
-        }
-
-        .card-buttom {
-            margin-top: 20px;
-        }
-
-        .card-top-header {
-            padding-top: 20px;
-            padding-bottom: 20px;
-            background-color: rgb(50, 158, 249);
-            font-size: 18px;
-            color: #FFFFFF;
-        }
-
-        .text-address-information {
-            margin-top: 5px;
-        }
-
-        .text-personal-information {
-            margin-top: 5px;
-            margin-bottom: 15px;
-        }
-        
-        .text-contact-information {
-            margin-top: 5px;
-        } */
 
     </style>
 </head>

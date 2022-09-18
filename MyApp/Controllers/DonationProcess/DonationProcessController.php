@@ -16,23 +16,6 @@ class DonationProcessController
      * @param object $request
      * @return void
      */
-    public function showDataDonationProcess(object $request): void
-    {
-        $sql = "SELECT * FROM donationprocess_tb";
-        $query = (new Query())->select($sql);
-
-        if (count($query) > 0) {
-            $_SESSION['donationprocess_tb'] = $query;
-            Response::success();
-        } else {
-            $_SESSION['donationprocess_tb'] = [];
-            Response::error();
-        }
-    }
-    /**
-     * @param object $request
-     * @return void
-     */
     public function insertDonationprocess(object $request): void
     {
         $strClean = new StringDifferent();

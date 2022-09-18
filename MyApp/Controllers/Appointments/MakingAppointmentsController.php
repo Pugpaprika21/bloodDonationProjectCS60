@@ -66,24 +66,6 @@ class MakingAppointmentsController
      * @param object $request
      * @return void
      */
-    public function showDataAppointments(object $request): void
-    {
-        $sql = "SELECT * FROM makingappointments_tb WHERE user_id =:user_id";
-        $query = (new Query())->select($sql, ['user_id' => $request->user_id]);
-
-        if (count($query) > 0) {
-            unset($_SESSION['makingappointments_tb']);
-            $_SESSION['makingappointments_tb'] = $query;
-            Response::success();
-        } else {
-            $_SESSION['makingappointments_tb'] = [];
-            Response::error('no data in db');
-        }
-    }
-    /**
-     * @param object $request
-     * @return void
-     */
     public function countAsDateApp(object $request): void
     {
         $stackDate = [];

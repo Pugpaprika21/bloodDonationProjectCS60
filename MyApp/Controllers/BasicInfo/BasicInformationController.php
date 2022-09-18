@@ -16,23 +16,6 @@ class BasicInformationController
      * @param object $request
      * @return void
      */
-    public function showDataBasicInfo(object $request): void
-    {
-        $sql = "SELECT * FROM basicinformation_tb";
-        $query = (new Query())->select($sql);
-
-        if (count($query) > 0) {
-            $_SESSION['basicinformation_tb'] = $query;
-            Response::success();
-        } else {
-            $_SESSION['basicinformation_tb'] = [];
-            Response::error();
-        }
-    }
-    /**
-     * @param object $request
-     * @return void
-     */
     public function showDataBasicInfoByID(object $request): void
     {
         $strClean = new StringDifferent();

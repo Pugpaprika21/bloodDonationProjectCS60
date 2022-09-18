@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
+<?php ($_SESSION['role'] !== 'user') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/header.php'); ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Component/navbar.php'); ?>
 
@@ -7,6 +7,20 @@
     .container {
         margin-top: 25px;
         padding-bottom: 50px;
+    }
+
+    .navbar {
+        background-color: #4C5DC6;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .navbar-brand {
+        color: #FFFFFF;
+    }
+
+    .container-main {
+        margin-top: 30px;
     }
 
     input[type=radio] {
@@ -66,92 +80,93 @@
     }
 </style>
 
-<div class="container">
-    <form method="post" id="formBlood-submit">
-        <input type="hidden" id="form_id" name="form_id" value="<?= (string)('FB' . date('d') . date('m') . (date('Y') + 543)); ?>">
-        <div class="d-flex justify-content-center">
-            <!-- card-main-bloodDonationForm1 | general health category -->
-            <div class="card card-main-bloodDonationForm1 shadow rounded">
-                <div class="card-header card-header-bloodDonationForm1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
-                        <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
-                    </svg> หมวดหมู่สุขภาพทั่วไป
-                </div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <td></td>
-                                <td>ใช่</td>
-                                <td>ไม่ใช่</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1. ท่านรู้สึกสบายดี สุขภาพแข็งแรง พร้อมที่จะบริจาคโลหิต</td>
-                                <td><input type="radio" name="healthCategoryQ1" value="y" required></td>
-                                <td><input type="radio" name="healthCategoryQ1" value="n"></td>
-                            </tr>
-                            <tr>
-                                <td>2. ท่านนอนหลับพักผ่อนเพียงพอ (ไม่น้อยกว่า 5 ชั่วโมง)</td>
-                                <td><input type="radio" name="healthCategoryQ2" value="y" required></td>
-                                <td><input type="radio" name="healthCategoryQ2" value="n"></td>
-                            </tr>
-                            <tr>
-                                <td>3. ท่านรับประทานอาหารที่มีไขมันสูง ภายใน 6 ชั่วโมงที่ผ่านมา</td>
-                                <td><input type="radio" name="healthCategoryQ3" value="y" required></td>
-                                <td><input type="radio" name="healthCategoryQ3" value="n"></td>
-                            </tr>
-                            </tr>
-                            <tr>
-                                <td>4. ท่านมีโรคประจำตัว หรือเคยเป็นโรค</td>
-                                <td><input type="radio" name="healthCategoryQ4" value="y" id="radio_margin" required></td>
-                                <td><input type="radio" name="healthCategoryQ4" value="n" id="radio_margin"></td>
-                            </tr>
-                            <tr>
-                                <td> 5. ท่านรับประทานยาปฏิชีวนะ (ยาฆ่าเชื้อ) ภายใน 7 วันที่ผ่านมา :
+<div class="container-fluid container-main">
+    <div class="card shadow rounded">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php">กลับสู่หน้าหลัก</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">เเบบฟอร์มเเสดงความประสงค์</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+</div>
 
-                                </td>
-                                <td><input type="radio" name="healthCategoryQ5" value="y" id="radio_margin" required></td>
-                                <td><input type="radio" name="healthCategoryQ5" value="n" id="radio_margin">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> 6. ท่านรับประทานยาแอสไพริน ยาคลายกล้ามเนื้อ ยาแก้ปวดข้อ หรือยาอื่นๆ ในกลุ่ม
-                                    เดียวกันภายใน 2 วันที่ผ่านมา</td>
-                                <td><input type="radio" name="healthCategoryQ6" value="y" required></td>
-                                <td><input type="radio" name="healthCategoryQ6" value="n"></td>
-                            </tr>
-                            <tr>
-                                <td> 7. ท่านมีการใช้ ยา / สมุนไพร / อาหารเสริมที่มีไบโอตินเป็นส่วนประกอบ เป็นประจำ
-                                    หรือไม่ :
-                                </td>
-                                <td><input type="radio" name="healthCategoryQ7" value="y" id="radio_margin" required></td>
-                                <td><input type="radio" name="healthCategoryQ7" value="n" id="radio_margin">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td> 8. ท่านดื่มแอลกอฮอล์ภายใน 24 ชั่วโมงที่ผ่านมา</td>
-                                <td><input type="radio" name="healthCategoryQ8" value="y" required></td>
-                                <td><input type="radio" name="healthCategoryQ8" value="n"></td>
-                            </tr>
-                            <tr>
-                                <td> 9. ท่านเคยบริจาคเซลล์ต้นกำเนิดเม็ดโลหิตในระยะ 6 เดือนที่ผ่านมา โปรดระบุ</td>
-                                <td><input type="radio" name="healthCategoryQ9" value="y" required></td>
-                                <td><input type="radio" name="healthCategoryQ9" value="n"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+<div class="container-fluid container-main">
+    <form method="post" id="formBlood-submit">
+        <div class="card shadow rounded">
+            <input type="hidden" id="form_id" name="form_id" value="<?= (string)('FB' . date('d') . date('m') . (date('Y') + 543)); ?>">
+            <div class="card-header card-header-bloodDonationForm1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
+                    <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z" />
+                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+                </svg> หมวดหมู่สุขภาพทั่วไป
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>ใช่</td>
+                            <td>ไม่ใช่</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1. ท่านรู้สึกสบายดี สุขภาพแข็งแรง พร้อมที่จะบริจาคโลหิต</td>
+                            <td><input type="radio" name="healthCategoryQ1" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ1" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td>2. ท่านนอนหลับพักผ่อนเพียงพอ (ไม่น้อยกว่า 5 ชั่วโมง)</td>
+                            <td><input type="radio" name="healthCategoryQ2" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ2" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td>3. ท่านรับประทานอาหารที่มีไขมันสูง ภายใน 6 ชั่วโมงที่ผ่านมา</td>
+                            <td><input type="radio" name="healthCategoryQ3" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ3" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td>4. ท่านมีโรคประจำตัว หรือเคยเป็นโรค</td>
+                            <td><input type="radio" name="healthCategoryQ4" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ4" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td> 5. ท่านรับประทานยาปฏิชีวนะ (ยาฆ่าเชื้อ) ภายใน 7 วันที่ผ่านมา :</td>
+                            <td><input type="radio" name="healthCategoryQ5" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ5" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td> 6. ท่านรับประทานยาแอสไพริน ยาคลายกล้ามเนื้อ ยาแก้ปวดข้อ หรือยาอื่นๆ ในกลุ่ม เดียวกันภายใน 2 วันที่ผ่านมา</td>
+                            <td><input type="radio" name="healthCategoryQ6" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ6" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td> 7. ท่านมีการใช้ ยา / สมุนไพร / อาหารเสริมที่มีไบโอตินเป็นส่วนประกอบ เป็นประจำ หรือไม่ :</td>
+                            <td><input type="radio" name="healthCategoryQ7" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ7" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td> 8. ท่านดื่มแอลกอฮอล์ภายใน 24 ชั่วโมงที่ผ่านมา</td>
+                            <td><input type="radio" name="healthCategoryQ8" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ8" value="n"></td>
+                        </tr>
+                        <tr>
+                            <td> 9. ท่านเคยบริจาคเซลล์ต้นกำเนิดเม็ดโลหิตในระยะ 6 เดือนที่ผ่านมา โปรดระบุ</td>
+                            <td><input type="radio" name="healthCategoryQ9" value="y" required></td>
+                            <td><input type="radio" name="healthCategoryQ9" value="n"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
-        <br>
-        <!-- card-main-bloodDonationForm2 -->
-        <div class="d-flex justify-content-center">
-            <!-- card-main-bloodDonationForm2 | Category : Pregnancy / Maternity -->
-            <div class="card card-main-bloodDonationForm2 shadow rounded">
+
+        <div class="container-fluid container-main">
+            <div class="card shadow rounded">
                 <div class="card-header card-header-bloodDonationForm2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-female" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M8 1a4 4 0 1 0 0 8 4 4 0 0 0 0-8zM3 5a5 5 0 1 1 5.5 4.975V12h2a.5.5 0 0 1 0 1h-2v2.5a.5.5 0 0 1-1 0V13h-2a.5.5 0 0 1 0-1h2V9.975A5 5 0 0 1 3 5z" />
@@ -187,11 +202,9 @@
                 </div>
             </div>
         </div>
-        <br>
-        <!-- card-main-bloodDonationForm3 -->
-        <div class="d-flex justify-content-center">
-            <!-- card-main-bloodDonationForm3 | Category : History of Sex -->
-            <div class="card card-main-bloodDonationForm3 shadow rounded">
+
+        <div class="container-fluid container-main">
+            <div class="card shadow rounded">
                 <div class="card-header card-header-bloodDonationForm3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
                         <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
@@ -213,11 +226,9 @@
                                 <td><input type="radio" name="historyOfSexQ1" value="n"></td>
                             </tr>
                             <tr>
-                                <td>14. ท่านหรือคู่ของท่านมีพฤติกรรมเสี่ยงทางเพศ :
-                                    มีเพศสัมพันธ์กับผู้ที่ไม่ใช่คู่ของตนเอง / ผู้ขาย <br> บริการ / ผู้เสพยาเสพติด /
-                                    ผู้ที่อาจติดเชื้อเอชไอวีหรือโรคติดต่อทางเพศสัมพันธ์อื่น</td>
-                                <td><input type="radio" name="historyOfSexQ2" value="y" id="radio_margin" required></td>
-                                <td><input type="radio" name="historyOfSexQ2" value="n" id="radio_margin"></td>
+                                <td>14. ท่านหรือคู่ของท่านมีพฤติกรรมเสี่ยงทางเพศ : มีเพศสัมพันธ์กับผู้ที่ไม่ใช่คู่ของตนเอง / ผู้ขาย บริการ / ผู้เสพยาเสพติด / ผู้ที่อาจติดเชื้อเอชไอวีหรือโรคติดต่อทางเพศสัมพันธ์อื่น</td>
+                                <td><input type="radio" name="historyOfSexQ2" value="y" required></td>
+                                <td><input type="radio" name="historyOfSexQ2" value="n"></td>
                             </tr>
                             <tr>
                                 <td>15. ท่านเคยใช้ยารักษาหรือป้องกันโรคเอชไอวี</td>
@@ -229,14 +240,12 @@
                 </div>
             </div>
         </div>
-        <br>
-        <!-- card-main-bloodDonationForm4 -->
-        <div class="d-flex justify-content-center">
-            <!-- card-main-bloodDonationForm4 | Category : History of risk of various infections -->
-            <div class="card card-main-bloodDonationForm4 shadow rounded">
+
+        <div class="container-fluid container-main">
+            <div class="card shadow rounded">
                 <div class="card-header card-header-bloodDonationForm4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-gender-male" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M9.5 2a.5.5 0 0 1 0-1h5a.5.5 0 0 1 .5.5v5a.5.5 0 0 1-1 0V2.707L9.871 6.836a5 5 0 1 1-.707-.707L13.293 2H9.5zM6 6a4 4 0 1 0 0 8 4 4 0 0 0 0-8z" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-moisture" viewBox="0 0 16 16">
+                        <path d="M13.5 0a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V7.5h-1.5a.5.5 0 0 0 0 1H15v2.75h-.5a.5.5 0 0 0 0 1h.5V15h-1.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5V.5a.5.5 0 0 0-.5-.5h-2zM7 1.5l.364-.343a.5.5 0 0 0-.728 0l-.002.002-.006.007-.022.023-.08.088a28.458 28.458 0 0 0-1.274 1.517c-.769.983-1.714 2.325-2.385 3.727C2.368 7.564 2 8.682 2 9.733 2 12.614 4.212 15 7 15s5-2.386 5-5.267c0-1.05-.368-2.169-.867-3.212-.671-1.402-1.616-2.744-2.385-3.727a28.458 28.458 0 0 0-1.354-1.605l-.022-.023-.006-.007-.002-.001L7 1.5zm0 0-.364-.343L7 1.5zm-.016.766L7 2.247l.016.019c.24.274.572.667.944 1.144.611.781 1.32 1.776 1.901 2.827H4.14c.58-1.051 1.29-2.046 1.9-2.827.373-.477.706-.87.945-1.144zM3 9.733c0-.755.244-1.612.638-2.496h6.724c.395.884.638 1.741.638 2.496C11 12.117 9.182 14 7 14s-4-1.883-4-4.267z" />
                     </svg> หมวดหมู่ : ประวัติความเสี่ยงของการติดเชื้อต่างๆ
                 </div>
                 <div class="card-body">
@@ -321,8 +330,8 @@
                             </tr>
                             <tr>
                                 <td> 30.ท่านได้รับวัคซีนเพื่อป้องกันโรคในระยะ 2 เดือนที่ผ่านมา</td>
-                                <td><input type="radio" name="historyVariousInfectionsQ15" value="y" id="radio_margin" required></td>
-                                <td><input type="radio" name="historyVariousInfectionsQ15" value="n" id="radio_margin"></td>
+                                <td><input type="radio" name="historyVariousInfectionsQ15" value="y" required></td>
+                                <td><input type="radio" name="historyVariousInfectionsQ15" value="n"></td>
                             </tr>
                             <tr>
                                 <td> 31. ท่านได้รับเซรุ่ม ภายใน 1 ปี ที่ผ่านมา</td>
@@ -335,14 +344,12 @@
                                 <td><input type="radio" name="historyVariousInfectionsQ17" value="n"></td>
                             </tr>
                             <tr>
-                                <td> 33. ท่านเคยถูกควบคุมตัวหรือจองจำในเรือนจำติดต่อกันเกิน 72 ชั่วโมง ในช่วง 1
-                                    ปีที่ผ่านมา</td>
+                                <td> 33. ท่านเคยถูกควบคุมตัวหรือจองจำในเรือนจำติดต่อกันเกิน 72 ชั่วโมง ในช่วง 1 ปีที่ผ่านมา</td>
                                 <td><input type="radio" name="historyVariousInfectionsQ18" value="y" required></td>
                                 <td><input type="radio" name="historyVariousInfectionsQ18" value="n"></td>
                             </tr>
                             <tr>
-                                <td> 34. ท่านเคยมีน้ำหนักลด มีไข้ มีต่อมน้ำเหลืองโตโดยไม่ทราบสาเหตุ ในระยะ 3
-                                    เดือนที่ผ่านมา หรือเคยตรวจพบว่าติดเชื้อเอชไอวี</td>
+                                <td> 34. ท่านเคยมีน้ำหนักลด มีไข้ มีต่อมน้ำเหลืองโตโดยไม่ทราบสาเหตุ ในระยะ 3 เดือนที่ผ่านมา หรือเคยตรวจพบว่าติดเชื้อเอชไอวี</td>
                                 <td><input type="radio" name="historyVariousInfectionsQ19" value="y" required></td>
                                 <td><input type="radio" name="historyVariousInfectionsQ19" value="n"></td>
                             </tr>
@@ -363,7 +370,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <button class="btn btn-primary w-100" type="submit">บันทึก</button>
+                    <button class="btn btn-primary btn-sm w-100" type="submit">บันทึก</button>
                 </div>
             </div>
         </div>
@@ -372,6 +379,8 @@
     </form>
 </div>
 
+
+
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/footer.php'); ?>
 
 <script>
@@ -379,7 +388,7 @@
 
         $('#formBlood-submit').submit(function(e) {
             e.preventDefault();
-            
+
             let form_id = $('#form_id').val();
             Swal.fire({
                 title: 'Are you sure?',

@@ -1,17 +1,8 @@
-<style>
-    .navbar {
-        padding-top: 25px;
-        padding-bottom: 25px;
-        background-color: #1892EC ;
-    }
-
-    .navbar-brand, .nav-link-appointments {
-        color: #FFFFFF;
-    }
-</style>
-
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar">
     <div class="container-fluid">
-        <a class="navbar-brand nav-link-appointments" href="../../../../../bloodDonationProjectCS60/MyApp/View/Users/home.php?status=0">บริจาคโลหิต</a>
+        <a class="navbar-brand">
+            การพัฒนาเว็บแอปพลิเคชันสำหรับแสดงความประสงค์และ นัดหมายบริจาคโลหิต
+        </a>
+        <a class="btn btn-success btn-sm" href="../../../index.php" role="button">ออกจากระบบ</a>
     </div>
 </nav>

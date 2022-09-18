@@ -9,11 +9,26 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 $dateThai = new DateThai();
 
 ?>
-<?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
+<?php ($_SESSION['role'] !== 'user') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/header.php'); ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Component/navbar.php'); ?>
 
 <style>
+    .navbar {
+        background-color: #4C5DC6;
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .navbar-brand {
+        color: #FFFFFF;
+    }
+
+    /* content */
+    .container-main {
+        margin-top: 30px;
+    }
+
     .card-main {
         margin-top: 30px;
         margin-bottom: 40px;
@@ -53,14 +68,11 @@ $dateThai = new DateThai();
         padding-top: 20px;
         padding-bottom: 20px;
     }
-
 </style>
 
-<div class="container">
-
-    <div class="card shadow-sm rounded card-main">
+<div class="container-fluid">
+    <div class="card shadow rounded card-main">
         <div class="card-body">
-
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-basic-information-tab" data-bs-toggle="pill" data-bs-target="#pills-basic-information" type="button" role="tab" aria-controls="pills-basic-information" aria-selected="false">
@@ -153,31 +165,105 @@ $dateThai = new DateThai();
 <script>
     $(document).ready(function() {
 
-        var url = '';
-
-        getDataToTable('#basicinformation_tb', '../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_showDataBasicInfo.php', <?= $_SESSION['user_id']; ?>);
-
-        getDataToTable('#appointmentsShowData', '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_showDataAppointments.php', {
-            user_id: <?= $_SESSION['user_id']; ?>
-        });
-
-        getDataToTable('#formBloodData', '../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBlood.php', {
-            user_id: <?= $_SESSION['user_id']; ?>
-        });
-
-        getDataToTable('#donationprocess_tb', '../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_showDataDonationProcess.php', <?= $_SESSION['user_id']; ?>);
-
-        function getDataToTable(dataTable, url, data) {
+        // ... basicinformation_tb
+        (function () {
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: url,
-                data: data,
-                success: function(response) {
-                    console.log(response);
-                    $(dataTable).DataTable();
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_getAllBasicInfo.php",
+                success: function (response) {
+                    let dt = $('#basicinformation_tb').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'bc_id'},
+                            {data: 'nameSc'},
+                            {data: 'addressSc'},
+                            {data: 'officeHoursSc'},
+                            {data: 'provinceSc'},
+                            {data: 'districtSc'},
+                            {data: 'subDistrictSc'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 7,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-primary btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/view_basicInformation.php?bc_id=${row.bc_id}" role="button">เพิ่มเติม</a>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
+
+                    dt.on('order.dt search.dt', function() {
+                        let i = 1;
+                        dt.cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        }).every(function(cell) {
+                            this.data(i++);
+                        });
+                    }).draw();
                 }
             });
-        }
+        })();
+
+        // ... getAllDonationProcess
+        (function () {
+            $.ajax({
+                type: "GET",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_getAllDonationProcess.php",
+                success: function (response) {
+                    let dt = $('#donationprocess_tb').DataTable({
+                        data: response,
+                        columns: [
+                            {data: 'dona_id'},
+                            {data: 'donationStep1'},
+                            {data: 'donationStep2'},
+                            {data: 'donationStep3'},
+                            {data: 'donationStep4'},
+                            {data: 'donationStep5'},
+                            {data: 'null'},
+                        ],
+                        columnDefs: [
+                            {
+                                targets: 6,
+                                searchable: false,
+                                orderable: false,
+                                render: function(data, type, row) {
+                                    return `
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <a class="btn btn-warning btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Users/view_donationProcess.php?dona_id=${row.dona_id}" role="button">เพิ่มเติม</a>
+                                        </div>
+                                    `;
+                                }
+                            }
+                        ],
+                        order: [
+                            [1, 'asc']
+                        ],
+                    });
+
+                    dt.on('order.dt search.dt', function() {
+                        let i = 1;
+                        dt.cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        }).every(function(cell) {
+                            this.data(i++);
+                        });
+                    }).draw();
+                }
+            });
+        })();
     });
 </script>

@@ -46,26 +46,6 @@ class FormBloodController
      * @param object $request
      * @return void
      */
-    public function showDataFormBlood(object $request): void
-    {
-        $sql = "SELECT * FROM formblood_tb WHERE user_id =:user_id";
-        $query = (new Query())->select($sql, [
-            'user_id' => $request->user_id
-        ]);
-
-        if (count($query) > 0) {
-            unset($_SESSION['formblood_tb']);
-            $_SESSION['formblood_tb'] = $query;
-            Response::success();
-        } else {
-            $_SESSION['formblood_tb'] = [];
-            Response::error();
-        }
-    }
-    /**
-     * @param object $request
-     * @return void
-     */
     public function showDataFormBloodByID(object $request): void
     {
         $sql = "SELECT * FROM formblood_tb WHERE form_id =:form_id";
