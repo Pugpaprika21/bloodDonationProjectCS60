@@ -2,8 +2,7 @@
 <?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/header.php'); ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/component/navbar.php'); ?>
-<?php $formbloodByID = isset($_SESSION['formbloodByID']) ? $_SESSION['formbloodByID'] : [];
-$checked = 'checked'; ?>
+<?php $formbloodByID = isset($_SESSION['formbloodByID']) ? $_SESSION['formbloodByID'] : []; $checked = 'checked'; ?>
 
 <style>
     .navbar {
