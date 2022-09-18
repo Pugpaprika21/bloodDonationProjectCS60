@@ -161,7 +161,21 @@ class AdminController
             Response::error();
         }
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function deleteUserByID(object $request): void
+    {
+        $strClean = new StringDifferent();
+        $sql = "DELETE FROM user_tb WHERE user_id =:user_id";
+
+        $query = (new Query())->delete($sql, [
+            'user_id' => $strClean->clean($request->id)
+        ]);
+
+        if ($query) {
+            Response::success();
+        } 
+    }
 }
-
-
-

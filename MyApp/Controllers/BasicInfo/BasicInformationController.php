@@ -48,6 +48,24 @@ class BasicInformationController
             Response::error();
         }
     }
+    /**
+     * @param object $request
+     * @return void
+     */
+    public function insertBasicInfo(object $request): void
+    {
+        $strClean = new StringDifferent();
+        $str = $strClean::letter($request);
+
+        $sql = "INSERT INTO basicinformation_tb($str->column) VALUES($str->rows)";
+        $query = (new Query())->insert($sql, (array)$str->dataRequest);
+
+        if ($query) {
+            Response::success();
+        }
+    }
 }
+
+
 
 

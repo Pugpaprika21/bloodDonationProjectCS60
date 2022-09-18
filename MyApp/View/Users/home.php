@@ -101,11 +101,6 @@ $dateThai = new DateThai();
                                     <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 5 7h2.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-3 8A1.5 1.5 0 0 1 4.5 10h1A1.5 1.5 0 0 1 7 11.5v1A1.5 1.5 0 0 1 5.5 14h-1A1.5 1.5 0 0 1 3 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 9 12.5v-1z" />
                                 </svg> ขั้นตอนการบริจาคโลหิต
                             </button>
-                            <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-diagram-3-fill mb-1" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-6 8A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm6 0A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1z" />
-                                </svg> การเตรียมตัวก่อนหลังบริจาคโลหิต
-                            </button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
@@ -114,9 +109,6 @@ $dateThai = new DateThai();
                         </div>
                         <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
                             <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/donationprocess_tb.php'); ?>
-                        </div>
-                        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
-                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Users/Layout/preparing_blooddonation_tb.php'); ?>
                         </div>
                     </div>
                 </div>
@@ -168,8 +160,6 @@ $dateThai = new DateThai();
         getDataToTable('#appointmentsShowData', '../../../../bloodDonationProjectCS60/MyApp/Web/Appointments/web_MakingAppointmentsController_showDataAppointments.php', {
             user_id: <?= $_SESSION['user_id']; ?>
         });
-
-        getDataToTable('#preparing_blooddonation_tb', '../../../../bloodDonationProjectCS60/MyApp/Web/PreparingBlooddonation/web_PreparingBloodDonationController_showDataPreparingBlooddonation.php', <?= $_SESSION['user_id']; ?>);
 
         getDataToTable('#formBloodData', '../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_showDataFormBlood.php', {
             user_id: <?= $_SESSION['user_id']; ?>

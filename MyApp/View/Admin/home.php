@@ -1,15 +1,4 @@
-<?php
-
-use MyApp\Helper\Date\DateThai;
-
-session_start();
-
-require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
-
-$dateThai = new DateThai();
-
-?>
-
+<?php session_start(); ?>
 <?php ($_SESSION['role'] !== 'admin') ? header('location: ../../../../../bloodDonationProjectCS60/index.php') : ''; ?>
 <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/header.php'); ?>
 
@@ -67,7 +56,7 @@ $dateThai = new DateThai();
                     <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">หน้าเเรก</button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-manage-tab" data-bs-toggle="pill" data-bs-target="#pills-manage" type="button" role="tab" aria-controls="pills-manage" aria-selected="false">จัดการ</button>
+                    <button class="nav-link" id="pills-insertData-tab" data-bs-toggle="pill" data-bs-target="#pills-insertData" type="button" role="tab" aria-controls="pills-insertData" aria-selected="false">เพิ่มข้อมูล</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
@@ -109,8 +98,27 @@ $dateThai = new DateThai();
                     <!-- nav-chaild home -->
                 </div>
                 <!-- จัดการ -->
-                <div class="tab-pane fade" id="pills-manage" role="tabpanel" aria-labelledby="pills-manage-tab" tabindex="0">
-
+                <div class="tab-pane fade" id="pills-insertData" role="tabpanel" aria-labelledby="pills-insertData-tab" tabindex="0">
+                    <nav>
+                        <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
+                            <button class="nav-link active" id="nav-insertBasicInfo-tab" data-bs-toggle="tab" data-bs-target="#nav-insertBasicInfo" type="button" role="tab" aria-controls="nav-insertBasicInfo" aria-selected="true">ข้อมูลพื้นฐาน</button>
+                            <button class="nav-link" id="nav-insert-donationprocess-tab" data-bs-toggle="tab" data-bs-target="#nav-insert-donationprocess" type="button" role="tab" aria-controls="nav-insert-donationprocess" aria-selected="false">ขั้นตอนการบริจาคโลหิต</button>
+                            <button class="nav-link" id="nav-insert-preparing_blooddonation-tab" data-bs-toggle="tab" data-bs-target="#nav-insert-preparing_blooddonation" type="button" role="tab" aria-controls="nav-insert-preparing_blooddonation" aria-selected="true">ข้อมูลการเตรียมตัวก่อนเเละ หลังบริจาคโลหิต</button>
+                        </div>
+                    </nav>
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-insertBasicInfo" role="tabpanel" aria-labelledby="nav-insertBasicInfo-tab" tabindex="0">
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/form_insertBasicInfo.php'); ?>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="nav-insert-donationprocess" role="tabpanel" aria-labelledby="nav-insert-donationprocess-tab" tabindex="0">
+                            <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/form_donationprocess.php'); ?>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="nav-insert-preparing_blooddonation" role="tabpanel" aria-labelledby="nav-insert-preparing_blooddonation-tab" tabindex="0">
+                            
+                        </div>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">...</div>
                 <div class="tab-pane fade" id="pills-disabled" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">...</div>
@@ -214,7 +222,7 @@ $dateThai = new DateThai();
                                         <div class="d-grid gap-2 d-md-block">
                                             <a class="btn btn-info btn-sm text-white" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_userData.php?user_id=${row.user_id}" role="button">ดู</a>
                                             <a class="btn btn-warning btn-sm" href="../../../../bloodDonationProjectCS60/MyApp/View/Admin/view_userEditData.php?user_id=${row.user_id}" role="button">เเก้ไข</a>
-                                            <button type="button" class="btn btn-danger btn-sm" onclick="btnDelete(${row.user_id}, 'ต้องการลบข้อมูลการนัดหมายรหัส ', '../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_deleteAppointmentByID.php');">ลบ</button>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="btnDelete(${row.user_id}, 'ต้องการลบข้อมูลสมาชิกรหัส ', '../../../../bloodDonationProjectCS60/MyApp/Web/Admin/web_AdminController_deleteUserByID.php');">ลบ</button>
                                         </div>
                                     `;
                                 }
@@ -245,8 +253,6 @@ $dateThai = new DateThai();
                 dataType: "json",
                 url: "../../../../bloodDonationProjectCS60/MyApp/Web/FormBlood/web_FormBloodController_getAllformBlood.php",
                 success: function (response) {
-                    console.log(response);
-
                     let dt = $('#formBlood').DataTable({
                         data: response,
                         columns: [
@@ -280,6 +286,57 @@ $dateThai = new DateThai();
                 }
             });
         })();
+
+        $('#form-insertBasicInfo').submit(function (e) { 
+            e.preventDefault();
+            const Fd = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/BasicInfo/web_BasicInformationController_insertBasicInfo.php",
+                data: Fd,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status == 200) {
+                        Swal.fire(
+                            'สำเร็จ',
+                            'เพิ่มข้อมูลศูนย์บริการโลหิตสำเร็จ',
+                            'success'
+                        ).then((result) => {
+                            window.location.reload();
+                        });
+                    }
+                }
+            });
+        });
+
+        $('#form-insertDonationprocess').submit(function (e) { 
+            e.preventDefault();
+            const Fd = new FormData($(this)[0]);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "../../../../bloodDonationProjectCS60/MyApp/Web/DonationProcess/web_DonationProcessController_insertDonationprocess.php",
+                data: Fd,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response.status == 200) {
+                        Swal.fire(
+                            'สำเร็จ',
+                            'เพิ่มข้อมูลขั้นตอนการบริจาคโลหิต',
+                            'success'
+                        ).then((result) => {
+                            window.location.reload();
+                        }); 
+                    }
+                }
+            });
+        });
+
     });
 
     function btnDelete(id, text, url) {
@@ -304,7 +361,7 @@ $dateThai = new DateThai();
                         if (response.status == 200) {
                             Swal.fire(
                                 'สำเร็จ',
-                                'ลบข้อมูลการนัดหมายบริจาคโลหิตสำเร็จ',
+                                'ลบข้อมูลสำเร็จ',
                                 'success'
                             ).then((result) => {
                                 window.location.reload();

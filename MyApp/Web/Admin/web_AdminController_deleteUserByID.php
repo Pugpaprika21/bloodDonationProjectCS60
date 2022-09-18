@@ -1,6 +1,6 @@
 <?php
 
-use MyApp\Controllers\PreparingBlooddonation\PreparingBloodDonationController;
+use MyApp\Controllers\Admin\AdminController;
 use MyApp\Http\HttpRequest\Request;
 
 require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
@@ -8,5 +8,5 @@ require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Inc
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     $request = Request::get()->toStdClass();
-    (new PreparingBloodDonationController())->showDataPreparingBlooddonation($request);
+    (new AdminController())->deleteUserByID($request);
 }
