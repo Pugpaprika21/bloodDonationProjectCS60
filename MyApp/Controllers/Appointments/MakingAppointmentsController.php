@@ -34,6 +34,7 @@ class MakingAppointmentsController
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('นัดหมายบริจาคโลหิตได้อีกภายในวันที่ ' . $dayMonthYearTomorrow);
+            
         } else {
 
             $sql = "INSERT INTO makingappointments_tb(dateApp, durationApp, durationTime, durationStatus, user_id) VALUES(:dateApp, :durationApp, :durationTime, :durationStatus, :user_id)";
