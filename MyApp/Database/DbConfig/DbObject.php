@@ -9,10 +9,10 @@ use PDOException;
 
 class DbObject
 {
-    private string $servername = "";
-    private string $username = "";
-    private string $password = "";
-    private string $dbname = "";
+    private $servername = "";
+    private $username = "";
+    private $password = "";
+    private $dbname = "";
 
     public $conn = null;
     /**
