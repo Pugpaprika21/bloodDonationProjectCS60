@@ -600,7 +600,7 @@
                     form_id: url
                 },
                 success: function(response) {
-                    console.log(response);
+                    //window.location.reload();
                 }
             });
         })();

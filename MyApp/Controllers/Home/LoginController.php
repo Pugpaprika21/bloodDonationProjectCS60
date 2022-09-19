@@ -18,6 +18,9 @@ class LoginController
      */
     public function login(object $request): void
     {
+        $roleAdmin = 'admin';
+        $roleUsers = 'user';
+
         $str = new StringDifferent();
         $sql = "SELECT user_id, username, password, gender, role FROM user_tb WHERE username =:username AND password =:password";
 
@@ -27,18 +30,29 @@ class LoginController
         ]);
 
         if (count($query) > 0) {
-            
-            $_SESSION['user_id'] = $query[0]->user_id;
-            $_SESSION['username'] = $query[0]->username;
-            $_SESSION['password'] = $query[0]->password;
-            $_SESSION['gender'] = $query[0]->gender;
-            $_SESSION['role'] = $query[0]->role;
 
-            Response::success();
+            if ($query[0]->role == $roleAdmin) {
+
+                $_SESSION['user_id'] = $query[0]->user_id;
+                $_SESSION['username'] = $query[0]->username;
+                $_SESSION['password'] = $query[0]->password;
+                $_SESSION['role'] = $query[0]->role;
+
+                Response::success('admin');
+
+            } else {
+
+                $_SESSION['user_id'] = $query[0]->user_id;
+                $_SESSION['username'] = $query[0]->username;
+                $_SESSION['password'] = $query[0]->password;
+                $_SESSION['gender'] = $query[0]->gender;
+                $_SESSION['role'] = $query[0]->role;
+
+                Response::success('user');
+            }
+
         } else {
             Response::error();
         }
     }
 }
-
-

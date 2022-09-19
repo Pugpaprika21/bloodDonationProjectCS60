@@ -3,13 +3,16 @@
 <?php require_once('../bloodDonationProjectCS60/MyApp/Template/Index/Layout/formLogin.php'); ?>
 <?php require_once('../bloodDonationProjectCS60/MyApp/Template/Index/Layout/footer.php'); ?>
 
-<script>
+<script src="../bloodDonationProjectCS60/MyApp/Asset/Js/public/urlSearchParams.js"></script>
 
-    $(document).ready(function () {
-        
-        $('#form-login').submit(function (e) { 
+<script>
+    $(document).ready(function() {
+
+        var getUrl = urlSearchParams('logout');
+
+        $('#form-login').submit(function(e) {
             e.preventDefault();
-          
+
             let username = $('#username').val();
             let password = $('#password').val();
 
@@ -18,15 +21,57 @@
                     type: "POST",
                     dataType: "json",
                     url: "../bloodDonationProjectCS60/MyApp/Web/Home/web_LoginController_login.php",
-                    data: {username: username, password: password},
-                    success: function (response) {
-                        if (response.status == 200) {
-                            window.location.href = '../bloodDonationProjectCS60/MyApp/View/Users/home.php';
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function(response) {
+                        if (response.massage == 'user') {
+                            Swal.fire(
+                                'สำเร็จ',
+                                'ล็อคอินสำเร็จ',
+                                'success'
+                            ).then((result => {
+                                window.location.href = '../bloodDonationProjectCS60/MyApp/View/Users/home.php';
+                            }));
+
+                        } else if (response.massage == 'admin') {
+                            Swal.fire(
+                                'สำเร็จ',
+                                'ล็อคอินสำเร็จ',
+                                'success'
+                            ).then((result => {
+                                window.location.href = '../bloodDonationProjectCS60/MyApp/View/Admin/home.php';
+                            }));
+
+                        } else {
+                            Swal.fire(
+                                'ผิดพลาด',
+                                'ล็อคอินไม่สำเร็จ',
+                                'error'
+                            ).then((result => {
+                                window.location.reload();
+                            }));
                         }
                     }
                 });
-            } 
+            }
         });
-    });
 
+        logout(getUrl);
+
+        function logout(getUrl) {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "../bloodDonationProjectCS60/MyApp/Web/Home/web_LogoutController_logout.php",
+                data: {
+                    logout: getUrl
+                },
+                success: function(response) {
+                    //console.log(response);
+                }
+            });
+        }
+    });
 </script>
