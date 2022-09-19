@@ -69,7 +69,15 @@
                     logout: getUrl
                 },
                 success: function(response) {
-                    //console.log(response);
+                    if (response.status == 200) {
+                        Swal.fire(
+                            'สำเร็จ',
+                            'ออกจากระบบสำเร็จ',
+                            'success'
+                        ).then((result => {
+                            $('#username').focus();
+                        }));
+                    }
                 }
             });
         }
