@@ -49,7 +49,7 @@ class MakingAppointmentsController
             if ($query) {
 
                 $dateThai = (new DateThai)->get($request->dateApp)->dayMonthYearCut();
-                $message = "นัดหมายบริจาคโลหิต" . "\r\n" . "บันทึกข้อมูลการนัดหมายบริจาคโลหิตในวันที่ " . $dateThai . " สำเร็จ ขอบคุณครับ";
+                $message = "นัดหมายบริจาคโลหิต" . "\r\n" . "บันทึกข้อมูลการนัดหมายบริจาคโลหิตในวันที่ " . $dateThai  ." ". $request->durationApp ."เวลา ". $request->durationTime . " สำเร็จ ขอบคุณครับ";
 
                 $notify = (new LineNotify())
                     ->setMessage($message)
