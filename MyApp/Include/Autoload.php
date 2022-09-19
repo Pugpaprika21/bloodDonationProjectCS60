@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace MyApp\Include;
 
-// session_start();
-
 class Autoloader
 {
-    public static $folder_name = '/bloodDonationProjectCS60/'; //<--- config root directory
+    public static $folder_name = '/bloodDonationProjectCS60/'; 
     /**
      * @return void
      */
@@ -27,5 +25,4 @@ class Autoloader
     }
 }
 
-// call autoload
 Autoloader::register();
