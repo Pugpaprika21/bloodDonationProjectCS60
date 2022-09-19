@@ -112,7 +112,7 @@
     </div>
 </div>
 
-<div class="container-fluid container-main">
+<div class="container-fluid container-main mb-4">
     <form method="post" id="formBlood-submit">
         <div class="card shadow rounded">
             <input type="hidden" id="form_id" name="form_id" value="<?= (string)('FB' . date('d') . date('m') . (date('Y') + 543)); ?>">
