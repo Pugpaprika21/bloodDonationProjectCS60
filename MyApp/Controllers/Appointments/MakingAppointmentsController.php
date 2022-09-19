@@ -8,6 +8,7 @@ use MyApp\Helper\Date\DateThai;
 use MyApp\Helper\Tool\StringDifferent;
 use MyApp\Http\HttpResponse\Response;
 use MyApp\QueryBuilder\AppQuery\Query;
+use MyApp\Library\LineNotify\LineNotify;
 
 require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
 
@@ -46,7 +47,17 @@ class MakingAppointmentsController
             ]);
 
             if ($query) {
-                Response::success();
+
+                $dateThai = (new DateThai)->get($request->dateApp)->dayMonthYearCut();
+                $message = "นัดหมายบริจาคโลหิต" . "\r\n" . "บันทึกข้อมูลการนัดหมายบริจาคโลหิตในวันที่ " . $dateThai . " สำเร็จ ขอบคุณครับ";
+
+                $notify = (new LineNotify())
+                    ->setMessage($message)
+                    ->sendNotify();
+
+                if ($notify->status == 200) {
+                    Response::success();
+                }
             }
         }
     }

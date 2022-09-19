@@ -5,7 +5,7 @@ namespace MyApp\Library\LineNotify;
 class LineNotify
 {
     private string $lineApi = "https://notify-api.line.me/api/notify";
-    private string $token = "QUca5ugHzYyDtrxd9iUTwV8VEQnWHXLAWWqgNXZoSB5"; //ใส่Token ที่copy เอาไว้
+    private string $token = "43gJ1zDg3hfBMaGXFqPTbRnJytEbVmlGN2vcNsaVHip"; //ใส่Token ที่copy เอาไว้
     
     private $headerOptions = [];
     /**

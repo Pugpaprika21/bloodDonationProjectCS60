@@ -8,6 +8,7 @@ use MyApp\Helper\Date\DateThai;
 use MyApp\Helper\Tool\StringDifferent;
 use MyApp\Http\HttpResponse\Response;
 use MyApp\QueryBuilder\AppQuery\Query;
+use MyApp\Library\LineNotify\LineNotify;
 
 require_once dirname(__DIR__) . ('../../../../bloodDonationProjectCS60/MyApp/Include/Autoload.php');
 
@@ -31,6 +32,7 @@ class FormBloodController
             $dayMonthYearTomorrow = (new DateThai())->get($tomorrow)->dayMonthYearCut();
 
             Response::error('กรุณาทำเเบบสอบถามเเสดงความประสงค์บริจาคโลหิตในวันที่ ' . $dayMonthYearTomorrow);
+            
         } else {
 
             $str = $strClean::letter($request);
@@ -38,7 +40,17 @@ class FormBloodController
             $query = (new Query())->insert($sql, (array)$str->dataRequest);
 
             if ($query) {
-                Response::success();
+
+                $dateThai = (new DateThai)->get(date('Y-m-d'))->dayMonthYearCut();
+                $message = "เเบบฟอร์มบริจาค" . "\r\n" . "บันทึกข้อมูลเเบบฟอร์มบริจาคโลหิตในวันที่ " . $dateThai . " สำเร็จ ขอบคุณครับ";
+
+                $notify = (new LineNotify())
+                    ->setMessage($message)
+                    ->sendNotify();
+
+                if ($notify->status == 200) {
+                    Response::success();
+                }
             }
         }
     }
@@ -70,7 +82,7 @@ class FormBloodController
         $sql = "SELECT * FROM formblood_tb";
         $query = (new Query())->select($sql);
 
-        if (count($query) > 0) { 
+        if (count($query) > 0) {
             Response::render($query)->jsonString();
         }
     }
@@ -87,10 +99,9 @@ class FormBloodController
             'user_id' => $strClean->clean($request->user_id)
         ]);
 
-        if (count($query) > 0) { 
+        if (count($query) > 0) {
             $_SESSION['formbloodByID'] = $query;
             Response::render($query)->jsonString();
         }
-    }  
+    }
 }
-
