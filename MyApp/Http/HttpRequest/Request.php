@@ -4,7 +4,7 @@ namespace MyApp\Http\HttpRequest;
 
 class Request
 {
-    private static array $requestsArray = []; 
+    private static $requestsArray = []; 
     private static $requestsObject = null; 
     /**
      * @return self

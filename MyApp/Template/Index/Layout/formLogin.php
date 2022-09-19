@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center">
         <div class="card shadow rounded card-top" style="width: 35rem;">
             <div class="card-header card-top-header">
-                Login
+                ล๊อคอิน
             </div>
             <div class="card-body">
                 <form action="" method="post" id="form-login">

@@ -57,28 +57,39 @@
         <div class="card-body">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">หน้าเเรก</button>
+                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill mb-1" viewBox="0 0 16 16">
+                            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5z"/>
+                        </svg> หน้าเเรก
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-insertData-tab" data-bs-toggle="pill" data-bs-target="#pills-insertData" type="button" role="tab" aria-controls="pills-insertData" aria-selected="false">เพิ่มข้อมูล</button>
+                    <button class="nav-link" id="pills-insertData-tab" data-bs-toggle="pill" data-bs-target="#pills-insertData" type="button" role="tab" aria-controls="pills-insertData" aria-selected="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                        </svg> เพิ่มข้อมูล
+                    </button>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-editAsDelete-tab" data-bs-toggle="pill" data-bs-target="#pills-editAsDelete" type="button" role="tab" aria-controls="pills-editAsDelete" aria-selected="false">เเก้ไข / ลบ</button>
+                    <button class="nav-link" id="pills-editAsDelete-tab" data-bs-toggle="pill" data-bs-target="#pills-editAsDelete" type="button" role="tab" aria-controls="pills-editAsDelete" aria-selected="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-square" viewBox="0 0 16 16">
+                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                            <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1v-1c0-1-1-4-6-4s-6 3-6 4v1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
+                        </svg> เเก้ไข / ลบ
+                    </button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                     <nav>
                         <div class="nav nav-tabs nav justify-content-end" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-chartJs-tab" data-bs-toggle="tab" data-bs-target="#nav-chartJs" type="button" role="tab" aria-controls="nav-chartJs" aria-selected="true">ข้อมูลต่างๆ</button>
-                            <button class="nav-link" id="nav-userData-tab" data-bs-toggle="tab" data-bs-target="#nav-userData" type="button" role="tab" aria-controls="nav-userData" aria-selected="false">สมาชิก</button>
+                            <button class="nav-link active" id="nav-userData-tab" data-bs-toggle="tab" data-bs-target="#nav-userData" type="button" role="tab" aria-controls="nav-userData" aria-selected="false">สมาชิก</button>
                             <button class="nav-link" id="nav-formBlood-tab" data-bs-toggle="tab" data-bs-target="#nav-formBlood" type="button" role="tab" aria-controls="nav-formBlood" aria-selected="true">ข้อมูลเเบบฟอร์มเเสดงความประสงค์</button>
                             <button class="nav-link" id="nav-appointment-tab" data-bs-toggle="tab" data-bs-target="#nav-appointment" type="button" role="tab" aria-controls="nav-appointment" aria-selected="false">นัดหมายบริจาคโลหิต</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-chartJs" role="tabpanel" aria-labelledby="nav-chartJs-tab" tabindex="0">...</div>
-                        <div class="tab-pane fade" id="nav-userData" role="tabpanel" aria-labelledby="nav-userData-tab" tabindex="0">
+                        <div class="tab-pane fade show active" id="nav-userData" role="tabpanel" aria-labelledby="nav-userData-tab" tabindex="0">
                             <?php require_once('../../../../bloodDonationProjectCS60/MyApp/Template/Admin/Layout/userData_tb.php'); ?>
                         </div>
                         <div class="tab-pane fade" id="nav-formBlood" role="tabpanel" aria-labelledby="nav-formBlood-tab" tabindex="0">

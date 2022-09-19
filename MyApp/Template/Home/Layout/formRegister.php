@@ -2,7 +2,7 @@
     <div class="d-flex justify-content-center">
         <div class="card shadow rounded card-top" style="width: 50rem;">
             <div class="card-header card-top-header">
-                Register
+                ลงทะเบียน
             </div>
             <div class="card-body">
                 <form action="" method="post" id="form-register">

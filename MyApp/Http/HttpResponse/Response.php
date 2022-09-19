@@ -4,7 +4,7 @@ namespace MyApp\Http\HttpResponse;
 
 class Response
 {
-    public static array $response_input = [];
+    public static $response_input = [];
     /**
      * @param string $massage
      * @return void

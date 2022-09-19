@@ -78,6 +78,25 @@
         background-color: #505BB9;
         color: #FFFFFF;
     }
+
+    input {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        border: 2px solid #999;
+        transition: 0.2s all linear;
+        margin-right: 5px;
+        position: relative;
+        top: 4px;
+    }
+
+    input:checked {
+        border: 6px solid #4C5DC6;
+        outline: unset !important
+    }
 </style>
 
 <div class="container-fluid container-main">
