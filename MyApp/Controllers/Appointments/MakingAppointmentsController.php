@@ -66,18 +66,6 @@ class MakingAppointmentsController
      * @param object $request
      * @return void
      */
-    public function updateDurationStatus(object $request): void
-    {
-        $sql = "UPDATE FROM makingappointments_tb SET durationStatus =:durationStatus WHERE user_id =:user_id";
-        $query = (new Query())->update($sql, [
-            'durationStatus' => $request->durationStatus,
-            'user_id' => $request->user_id,
-        ]);
-    }
-    /**
-     * @param object $request
-     * @return void
-     */
     public function countAsDateApp(object $request): void
     {
         $stackDate = [];
